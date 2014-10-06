@@ -16,7 +16,8 @@ hs_err_pid*
 *.pydevproject
 .metadata
 .gradle
-bin/
+bin/*
+.settings/*
 tmp/
 *.tmp
 *.bak
