@@ -15,7 +15,6 @@ public class GameManager {
     private Finish finish;
     private Start start;
 
-
     public GameManager() {
 	// Create our data
 	tiles = new ArrayList<IGameTile>();
@@ -29,16 +28,17 @@ public class GameManager {
 	// TODO: Load stats
 
 	// Currently we generate static content
-	player = new Player(new Position(2,2));
-	start = new Start(new Position(0,0));
-	finish = new Finish(new Position(9,9));
+	player = new Player(new Position(2, 2));
+	start = new Start(new Position(0, 0));
+	finish = new Finish(new Position(9, 9));
     }
 
     /**
-     * This method checks to see if position in interest
-     * can be moved to. If so true, else false
+     * This method checks to see if position in interest can be moved to. If so
+     * true, else false
      * 
-     * @param position The position to be checked
+     * @param position
+     *            The position to be checked
      * @return Boolean if possible or not
      */
     public static boolean canMove(Position position) {
@@ -46,16 +46,16 @@ public class GameManager {
     }
 
     /**
-     * Handles updating the player based on action
-     * This should be called from a control/tilt listener
+     * Handles updating the player based on action This should be called from a
+     * control/tilt listener
      */
     public void updatePlayer() {
 	player.moveDown();
     }
 
     /**
-     * Prints a debug layout of the grid in the console
-     * This allows for handy debuging of the current game's state
+     * Prints a debug layout of the grid in the console This allows for handy
+     * debuging of the current game's state
      */
     public void printDebug() {
 	IGameTile[][] temp = new IGameTile[10][10];
@@ -66,14 +66,14 @@ public class GameManager {
 	temp[finish.getPostion().getRow()][finish.getPostion().getColumn()] = finish;
 
 	// Add tiles
-	for(IGameTile tile : tiles) {
+	for (IGameTile tile : tiles) {
 	    temp[tile.getPostion().getRow()][tile.getPostion().getColumn()] = tile;
 	}
 
 	// Print out the icon for each
-	for(int j=0; j<temp[0].length; j++) {
-	    for(int i=0; i<temp.length; i++) {
-		if(temp[j][i] != null)
+	for (int j = 0; j < temp[0].length; j++) {
+	    for (int i = 0; i < temp.length; i++) {
+		if (temp[j][i] != null)
 		    System.out.print(temp[j][i].getImage());
 		else
 		    System.out.print("  ");
@@ -81,6 +81,5 @@ public class GameManager {
 	    System.out.print("\n");
 	}
     }
-
 
 }

@@ -9,10 +9,11 @@ public class Start implements IGameTile {
     private Image image;
 
     /**
-     * Default constructor for a start block
-     * Has a position and an image that is always assigned to this type
+     * Default constructor for a start block Has a position and an image that is
+     * always assigned to this type
      * 
-     * @param position Top left position of the start block
+     * @param position
+     *            Top left position of the start block
      */
     public Start(Position position) {
 	this.position = position;
