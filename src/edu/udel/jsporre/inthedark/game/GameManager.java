@@ -9,11 +9,19 @@ import edu.udel.jsporre.inthedark.model.Start;
 import edu.udel.jsporre.inthedark.util.Position;
 
 public class GameManager {
-
+    
+    // Constants
+    public static final String GAME_VERSION = "v0.1";
+    public static final int TILE_SIZE = 20;
+    public static final int MAX_WORLD_HEIGHT = 24;
+    public static final int MAX_WORLD_WIDTH = 16;    
+    
+    // Data
     private ArrayList<IGameTile> tiles;
-    private Player player;
+    private static Player player;
     private Finish finish;
     private Start start;
+    private int score;
 
     public GameManager() {
 	// Create our data
@@ -27,10 +35,12 @@ public class GameManager {
 
 	// TODO: Load stats
 
-	// Currently we generate static content
-	player = new Player(new Position(2, 2));
+	// Static content
 	start = new Start(new Position(0, 0));
 	finish = new Finish(new Position(9, 9));
+	
+	// Put the player ontop of the start
+	player = new Player(new Position(start.getPostion().getRow(), start.getPostion().getColumn()));
     }
 
     /**
@@ -49,7 +59,7 @@ public class GameManager {
      * Handles updating the player based on action This should be called from a
      * control/tilt listener
      */
-    public void updatePlayer() {
+    public static void updatePlayer() {
 	player.moveDown();
     }
 
@@ -58,12 +68,15 @@ public class GameManager {
      * debuging of the current game's state
      */
     public void printDebug() {
+	
+	System.out.println("=========================");
+	
 	IGameTile[][] temp = new IGameTile[10][10];
 
 	// Print out our statics
-	temp[player.getPostion().getRow()][player.getPostion().getColumn()] = player;
 	temp[start.getPostion().getRow()][start.getPostion().getColumn()] = start;
 	temp[finish.getPostion().getRow()][finish.getPostion().getColumn()] = finish;
+	temp[player.getPostion().getRow()][player.getPostion().getColumn()] = player;
 
 	// Add tiles
 	for (IGameTile tile : tiles) {
@@ -71,15 +84,18 @@ public class GameManager {
 	}
 
 	// Print out the icon for each
-	for (int j = 0; j < temp[0].length; j++) {
-	    for (int i = 0; i < temp.length; i++) {
-		if (temp[j][i] != null)
-		    System.out.print(temp[j][i].getImage());
+	for (int i = 0; i < temp.length; i++) {
+	    for (int j = 0; j < temp[0].length; j++) {
+		//System.out.println("R: "+i+" C: "+j);
+		if (temp[i][j] != null)
+		    System.out.print(temp[i][j].getImage());
 		else
 		    System.out.print("  ");
 	    }
 	    System.out.print("\n");
 	}
+	
+	System.out.println("=========================");
     }
 
 }

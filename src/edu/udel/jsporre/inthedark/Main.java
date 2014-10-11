@@ -14,6 +14,10 @@ public class Main {
 	manager.printDebug();
 	manager.updatePlayer();
 	manager.printDebug();
+	manager.updatePlayer();
+	manager.printDebug();
+	manager.updatePlayer();
+	manager.printDebug();
     }
 
 }

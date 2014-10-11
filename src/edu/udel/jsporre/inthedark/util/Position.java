@@ -10,7 +10,7 @@ package edu.udel.jsporre.inthedark.util;
  *
  */
 public class Position extends Component3d {
-    public Position(double x, double y) {
+    public Position(double y, double x) {
 	super(x, y);
     }
 
