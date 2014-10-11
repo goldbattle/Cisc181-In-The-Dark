@@ -19,6 +19,24 @@ public class Player implements IGameTile {
 	this.image = new Image('O');
     }
     
+    /* Generic Move methods */
+    
+    public void moveRight() {
+	this.position.addColumn(1);
+    }
+    
+    public void moveLeft() {
+	this.position.addColumn(-1);
+    }
+    
+    public void moveDown() {
+	this.position.addRow(1);
+    }
+    
+    public void moveUp() {
+	this.position.addRow(-1);
+    }
+    
     /* Abstract methods */
     
     @Override

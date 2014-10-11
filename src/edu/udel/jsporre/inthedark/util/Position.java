@@ -38,7 +38,14 @@ public class Position extends Component3d {
     public void setRow(int row) {
 	setY(row);
     }
-
+    
+    public void addColumn(int column) {
+	setX(getX() + column);
+    }
+    
+    public void addRow(int row) {
+	setY(getY() + row);
+    }
     /**
      * Computes the distance "as the crow flies" between two Positions
      * in a Cartesian coordinate system.
