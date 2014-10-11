@@ -14,10 +14,6 @@ public class Position extends Component3d {
 	super(x, y);
     }
 
-    public Position(double x, double y, double z) {
-	super(x, y, z);
-    }
-
     /**
      * @return the column as the containing grid column 
      *  (i.e. the x value as an int).
@@ -34,13 +30,6 @@ public class Position extends Component3d {
 	return (int)getY();
     }
 
-    /**
-     * @return the depth as the containing grid depth 
-     *  (i.e. the z value as an int).
-     */
-    public int getDepth() {
-	return (int)getZ();
-    }
 
     public void setColumn(int column) {
 	setX(column);
@@ -48,10 +37,6 @@ public class Position extends Component3d {
 
     public void setRow(int row) {
 	setY(row);
-    }
-
-    public void setDepth(int depth) {
-	setZ(depth);
     }
 
     /**
@@ -64,8 +49,7 @@ public class Position extends Component3d {
     public double distance(Position other) {
 	double dx = other.getX() - getX();
 	double dy = other.getY() - getY();
-	double dz = other.getZ() - getZ();
-	return Math.sqrt(dx * dx + dy * dy + dz * dz);
+	return Math.sqrt(dx * dx + dy * dy);
     }
 
     /**
@@ -88,7 +72,6 @@ public class Position extends Component3d {
     public int blockDistance(Position other) {
 	int dx = Math.abs(other.getColumn() - getColumn());
 	int dy = Math.abs(other.getRow() - getRow());
-	int dz = Math.abs(other.getDepth() - getDepth());
-	return dx + dy + dz;
+	return dx + dy;
     }
 }
