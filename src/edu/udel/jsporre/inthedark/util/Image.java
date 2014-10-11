@@ -12,4 +12,8 @@ public class Image {
     public Image(char temp) {
 	this.temp = temp;
     }
+
+    public String toString() {
+	return temp + "";
+    }
 }
