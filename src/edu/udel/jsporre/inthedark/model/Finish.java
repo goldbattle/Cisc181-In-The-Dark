@@ -12,12 +12,11 @@ public class Finish implements IGameTile {
      * Default constructor for a finish block Has a position and an image that
      * is always assigned to this type
      * 
-     * @param position
-     *            Top left position of the finish block
+     * @param position Top left position of the finish block
      */
     public Finish(Position position) {
 	this.position = position;
-	this.image = new Image('F');
+	this.image = new Image("F");
     }
 
     /* Abstract methods */

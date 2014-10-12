@@ -11,12 +11,11 @@ public class Empty implements IGameTile {
     /**
      * Default constructor for an empty space
      * 
-     * @param position
-     *            Top left position of the space
+     * @param position Top left position of the space
      */
     public Empty(Position position) {
 	this.position = position;
-	this.image = new Image(' ');
+	this.image = new Image("  ");
     }
 
     /* Abstract methods */

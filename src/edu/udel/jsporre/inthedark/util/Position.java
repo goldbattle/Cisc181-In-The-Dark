@@ -15,8 +15,7 @@ public class Position extends Component3d {
     }
 
     /**
-     * @return the column as the containing grid column (i.e. the x value as an
-     *         int).
+     * @return the column as the containing grid column (i.e. the x value as an int).
      */
     public int getColumn() {
 	return (int) getX();

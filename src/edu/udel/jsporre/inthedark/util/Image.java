@@ -2,7 +2,8 @@ package edu.udel.jsporre.inthedark.util;
 
 public class Image {
 
-    public char temp;
+    // TODO: Store the icon of the tile here
+    public String temp;
 
     /**
      * Temp constructor for the image class This just holds a char that
@@ -10,11 +11,16 @@ public class Image {
      * 
      * @param temp
      */
-    public Image(char temp) {
+    public Image(String temp) {
 	this.temp = temp;
     }
-
+    
+    // TODO: Handle returning an image icon
+    
+    /**
+     * Prints out the string representation of the image object
+     */
     public String toString() {
-	return temp + "";
+	return temp;
     }
 }

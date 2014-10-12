@@ -11,12 +11,11 @@ public class Player implements IGameTile {
     /**
      * Default constructor for a player A player has a position and an icon
      * 
-     * @param position
-     *            Top left position of the player
+     * @param position Top left position of the player
      */
     public Player(Position position) {
 	this.position = position;
-	this.image = new Image('O');
+	this.image = new Image("O");
     }
 
     /* Generic Move methods */

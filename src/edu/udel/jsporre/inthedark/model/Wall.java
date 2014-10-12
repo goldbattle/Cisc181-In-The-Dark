@@ -12,12 +12,11 @@ public class Wall implements IGameTile {
      * Default constructor for a wall Walls have a position and an image that is
      * always assigned to type wall
      * 
-     * @param position
-     *            Top left position of the wall
+     * @param position Top left position of the wall
      */
     public Wall(Position position) {
 	this.position = position;
-	this.image = new Image('#');
+	this.image = new Image("#");
     }
 
     /* Abstract methods */
