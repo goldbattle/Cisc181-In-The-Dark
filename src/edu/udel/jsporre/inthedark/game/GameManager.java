@@ -23,7 +23,7 @@ public class GameManager {
     private static Start start;
     private static int score;
 
-    public GameManager() {
+    static {
 	// Create our data
 	tiles = new ArrayList<IGameTile>();
 
@@ -96,7 +96,7 @@ public class GameManager {
      * Prints a debug layout of the grid in the console This allows for handy
      * debuging of the current game's state
      */
-    public void printDebug() {
+    public static void printDebug() {
 	
 	System.out.println("=========================");
 	

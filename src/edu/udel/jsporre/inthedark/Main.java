@@ -1,5 +1,9 @@
 package edu.udel.jsporre.inthedark;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+
 import edu.udel.jsporre.inthedark.game.GameManager;
 import edu.udel.jsporre.inthedark.model.PlayerDirection;
 
@@ -11,20 +15,38 @@ public class Main {
 	System.out.println("Loading \"In the Dark\"");
 	System.out.println("Version: " + GameManager.GAME_VERSION);
 	double time_start = System.currentTimeMillis();
-	
-	// Create our manager
-	GameManager manager = new GameManager();
 
-	// Print debug
-//	manager.printDebug();
-//	GameManager.updatePlayer(PlayerDirection.DIRECTION_DOWN);
-//	manager.printDebug();
-//	GameManager.updatePlayer(PlayerDirection.DIRECTION_RIGHT);
-//	manager.printDebug();
-//	GameManager.updatePlayer(PlayerDirection.DIRECTION_DOWN);
-//	manager.printDebug();
+	// Create our manager
+	new GameManager();
+
+	System.out.println("Loaded in: " + (System.currentTimeMillis()-time_start) + "ms\n");
 	
-	System.out.println("Loaded in: " + (System.currentTimeMillis()-time_start) + "ms");
+	// This is just for testing in the console
+	// Handle key presses for testing
+	Scanner scanner = new Scanner(System.in);
+	System.out.println("Enter a direction [up,down,right,left].");
+	System.out.println("Type \"exit\" to exit.");
+	GameManager.printDebug();
+	String line_in = "";
+	while(!line_in.equals("exit")) {
+	    // Read in input
+	    line_in = scanner.nextLine();
+	    // Find Directions
+	    if(line_in.equals("up")){
+		GameManager.updatePlayer(PlayerDirection.DIRECTION_UP);
+	    } 
+	    else if(line_in.equals("down")){
+		GameManager.updatePlayer(PlayerDirection.DIRECTION_DOWN);
+	    }
+	    else if(line_in.equals("right")){
+		GameManager.updatePlayer(PlayerDirection.DIRECTION_RIGHT);
+	    }
+	    else if(line_in.equals("left")){
+		GameManager.updatePlayer(PlayerDirection.DIRECTION_LEFT);
+	    }
+	    // Print out the new state
+	    GameManager.printDebug();
+	}
     }
 
 }
