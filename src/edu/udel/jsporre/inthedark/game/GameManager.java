@@ -17,7 +17,7 @@ public class GameManager {
     public static final int MAX_WORLD_HEIGHT = 100;
     public static final int MAX_WORLD_WIDTH = 100;
     public static final int COLUMNS = 10;
-    public static final int ROWS = 10;
+    public static final int ROWS = 5;
     
     // Data
     private static ArrayList<IGameTile> tiles;
@@ -50,14 +50,19 @@ public class GameManager {
 	tiles.add(new Wall(new Position(4,4)));
 	tiles.add(new Wall(new Position(3,4)));
 	tiles.add(new Wall(new Position(2,4)));
-	tiles.add(new Wall(new Position(1,4)));
+	tiles.add(new Wall(new Position(0,2)));
 	tiles.add(new Wall(new Position(0,4)));
+	
+	tiles.add(new Wall(new Position(0,5)));
+	tiles.add(new Wall(new Position(0,6)));
+	tiles.add(new Wall(new Position(1,6)));
+	tiles.add(new Wall(new Position(2,6)));
 
 	// TODO: Load stats
 
 	// Static content
 	start = new Start(new Position(0, 0));
-	finish = new Finish(new Position(9, 9));
+	finish = new Finish(new Position(ROWS-1, COLUMNS-1));
 	
 	// Put the player ontop of the start
 	player = new Player(new Position(start.getPosition().getRow(), start.getPosition().getColumn()));
@@ -87,9 +92,9 @@ public class GameManager {
 	if(finish.getPosition().equals(position) && !finish.canWalkOn())
 	    return false;
 	// Compare to min max columns
-	if(position.getColumn() < 0 || position.getColumn() > COLUMNS)
+	if(position.getColumn() < 0 || position.getColumn() >= COLUMNS)
 	    return false;
-	if(position.getRow() < 0 || position.getRow() > ROWS)
+	if(position.getRow() < 0 || position.getRow() >= ROWS)
 	    return false;
 	// All passed, can be walked on
 	return true;
