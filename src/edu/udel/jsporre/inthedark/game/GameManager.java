@@ -16,6 +16,8 @@ public class GameManager {
     public static final String GAME_VERSION = "v0.1";
     public static final int MAX_WORLD_HEIGHT = 100;
     public static final int MAX_WORLD_WIDTH = 100;
+    public static final int COLUMNS = 10;
+    public static final int ROWS = 10;
     
     // Data
     private static ArrayList<IGameTile> tiles;
@@ -84,6 +86,11 @@ public class GameManager {
 	// Compare finish
 	if(finish.getPosition().equals(position) && !finish.canWalkOn())
 	    return false;
+	// Compare to min max columns
+	if(position.getColumn() < 0 || position.getColumn() > COLUMNS)
+	    return false;
+	if(position.getRow() < 0 || position.getRow() > ROWS)
+	    return false;
 	// All passed, can be walked on
 	return true;
     }
@@ -118,7 +125,7 @@ public class GameManager {
 	
 	System.out.println("==========");
 	
-	IGameTile[][] temp = new IGameTile[10][10];
+	IGameTile[][] temp = new IGameTile[ROWS][COLUMNS];
 
 	// Add tiles
 	for (IGameTile tile : tiles) {
