@@ -14,24 +14,24 @@ public class Empty implements IGameTile {
      * @param position Top left position of the space
      */
     public Empty(Position position) {
-	this.position = position;
-	this.image = new Image(" ");
+        this.position = position;
+        this.image = new Image(" ");
     }
 
     /* Abstract methods */
 
     @Override
     public boolean canWalkOn() {
-	return true;
+        return true;
     }
 
     @Override
     public Position getPosition() {
-	return position;
+        return position;
     }
 
     @Override
     public Image getImage() {
-	return image;
+        return image;
     }
 }

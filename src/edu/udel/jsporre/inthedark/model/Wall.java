@@ -9,31 +9,31 @@ public class Wall implements IGameTile {
     private Image image;
 
     /**
-     * Default constructor for a wall Walls have a position and an image that is
-     * always assigned to type wall
+     * Default constructor for a wall
+     * Walls have a position and an image that is always assigned to type wall
      * 
      * @param position Top left position of the wall
      */
     public Wall(Position position) {
-	this.position = position;
-	this.image = new Image("#");
+        this.position = position;
+        this.image = new Image("#");
     }
 
     /* Abstract methods */
 
     @Override
     public boolean canWalkOn() {
-	return false;
+        return false;
     }
 
     @Override
     public Position getPosition() {
-	return position;
+        return position;
     }
 
     @Override
     public Image getImage() {
-	return image;
+        return image;
     }
 
 }

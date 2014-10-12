@@ -9,30 +9,30 @@ public class Start implements IGameTile {
     private Image image;
 
     /**
-     * Default constructor for a start block Has a position and an image that is
-     * always assigned to this type
+     * Default constructor for a start block
+     * Has a position and an image that is always assigned to this type
      * 
      * @param position Top left position of the start block
      */
     public Start(Position position) {
-	this.position = position;
-	this.image = new Image("S");
+        this.position = position;
+        this.image = new Image("S");
     }
 
     /* Abstract methods */
 
     @Override
     public boolean canWalkOn() {
-	return true;
+        return true;
     }
 
     @Override
     public Position getPosition() {
-	return position;
+        return position;
     }
 
     @Override
     public Image getImage() {
-	return image;
+        return image;
     }
 }

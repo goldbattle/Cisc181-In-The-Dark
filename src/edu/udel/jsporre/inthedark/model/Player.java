@@ -10,7 +10,8 @@ public class Player implements IGameTile {
     private Image image;
 
     /**
-     * Default constructor for a player A player has a position and an icon
+     * Default constructor for a player
+     * A player has a position and an icon
      * 
      * @param position Top left position of the player
      */

@@ -13,22 +13,22 @@ public interface IGameTile {
     public boolean canWalkOn();
 
     /**
-     * This method allows the tile to get game ticks and update its settings
-     * over time
+     * This method allows the tile to get game ticks and
+     * update its settings over time
      */
     // public void updateTick();
 
     /**
-     * Returns the tile's current position, This is dictated as being the upper
-     * left corner
+     * Returns the tile's current position,
+     * This is dictated as being the upper left corner
      * 
      * @return Position of the tile
      */
     public Position getPosition();
 
     /**
-     * Returns the tile's current image icon This is what icon should be
-     * displayed on the screen
+     * Returns the tile's current image icon
+     * This is what icon should be displayed on the screen
      * 
      * @return Image of the tile
      */
