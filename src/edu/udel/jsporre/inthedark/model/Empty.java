@@ -26,7 +26,7 @@ public class Empty implements IGameTile {
     }
 
     @Override
-    public Position getPostion() {
+    public Position getPosition() {
 	return position;
     }
 

@@ -24,7 +24,7 @@ public interface IGameTile {
      * 
      * @return Position of the tile
      */
-    public Position getPostion();
+    public Position getPosition();
 
     /**
      * Returns the tile's current image icon This is what icon should be

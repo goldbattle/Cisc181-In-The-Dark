@@ -17,11 +17,11 @@ public class GameManager {
     public static final int MAX_WORLD_WIDTH = 100;    
     
     // Data
-    private ArrayList<IGameTile> tiles;
+    private static ArrayList<IGameTile> tiles;
     private static Player player;
-    private Finish finish;
-    private Start start;
-    private int score;
+    private static Finish finish;
+    private static Start start;
+    private static int score;
 
     public GameManager() {
 	// Create our data
@@ -40,7 +40,7 @@ public class GameManager {
 	finish = new Finish(new Position(9, 9));
 	
 	// Put the player ontop of the start
-	player = new Player(new Position(start.getPostion().getRow(), start.getPostion().getColumn()));
+	player = new Player(new Position(start.getPosition().getRow(), start.getPosition().getColumn()));
     }
 
     /**
@@ -51,8 +51,20 @@ public class GameManager {
      * @return Boolean if possible or not
      */
     public static boolean canMove(Position position) {
-	
-	return false;
+	// Compare start
+	if(start.getPosition().equals(position) && !start.canWalkOn())
+	    return false;
+	// Compare finish
+	if(finish.getPosition().equals(position) && !finish.canWalkOn())
+	    return false;
+	// Compare other tiles
+	for(IGameTile tile : tiles){
+	    // Return false if you can't walk on it
+	    if(tile.getPosition().equals(position) && !tile.canWalkOn())
+		return false;
+	}
+	// All passed, can be walked on
+	return true;
     }
 
     /**
@@ -88,13 +100,13 @@ public class GameManager {
 	IGameTile[][] temp = new IGameTile[10][10];
 
 	// Print out our statics
-	temp[start.getPostion().getRow()][start.getPostion().getColumn()] = start;
-	temp[finish.getPostion().getRow()][finish.getPostion().getColumn()] = finish;
-	temp[player.getPostion().getRow()][player.getPostion().getColumn()] = player;
+	temp[start.getPosition().getRow()][start.getPosition().getColumn()] = start;
+	temp[finish.getPosition().getRow()][finish.getPosition().getColumn()] = finish;
+	temp[player.getPosition().getRow()][player.getPosition().getColumn()] = player;
 
 	// Add tiles
 	for (IGameTile tile : tiles) {
-	    temp[tile.getPostion().getRow()][tile.getPostion().getColumn()] = tile;
+	    temp[tile.getPosition().getRow()][tile.getPosition().getColumn()] = tile;
 	}
 
 	// Print out the icon for each
