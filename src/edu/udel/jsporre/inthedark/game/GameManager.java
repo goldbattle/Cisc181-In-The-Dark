@@ -26,7 +26,7 @@ public class GameManager {
     private static Start start;
     private static int score;
 
-    static {
+    public GameManager() {
         // Create our data
         tiles = new ArrayList<IGameTile>();
 
@@ -121,10 +121,21 @@ public class GameManager {
             break;
         }
     }
+    
+    /**
+     * Checks if the game has ended
+     * The game has ended if the player is on top of the finish square
+     * 
+     * @return Boolean state of the game
+     */
+    public static boolean isEnd() {
+        return player.getPosition().equals(finish.getPosition());
+    }
 
     /**
      * Prints a debug layout of the grid in the console
      * This allows for handy debuging of the current game's state
+     * This acts as our toString method for the class, and classes below
      */
     public static void printDebug() {
 

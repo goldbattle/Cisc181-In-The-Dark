@@ -6,7 +6,11 @@ import edu.udel.jsporre.inthedark.model.PlayerDirection;
 import edu.udel.jsporre.inthedark.util.Position;
 
 public class MainTest extends TestCase {
-
+    
+    /**
+     * Tests for the position equals method
+     * This ensures that we have matching positions
+     */
     public void test_position() {
         Position temp1 = new Position(0,0);
         Position temp2 = new Position(0,0);
@@ -19,6 +23,10 @@ public class MainTest extends TestCase {
         assertFalse(temp1.equals(temp4));
     }
 
+    /**
+     * Tests if the player can move in a valid position
+     * Moves the player, and checks for that mutation
+     */
     public void test_canMove() {
         new GameManager();
 
@@ -27,9 +35,27 @@ public class MainTest extends TestCase {
         assertTrue(GameManager.canMove(new Position(0,1)));
 
         // Update, move player down
+        GameManager.updatePlayer(PlayerDirection.DIRECTION_RIGHT);
+
+        // Assert
+        assertTrue(GameManager.canMove(new Position(0,0)));
+        assertFalse(GameManager.canMove(new Position(0,1)));
+    }
+
+    public void test_playerMove() {
+        new GameManager();
+
+        // Asserts
+        assertFalse(GameManager.canMove(new Position(0,0)));
+        assertTrue(GameManager.canMove(new Position(2,1)));
+
+        // Update player, try to move into wall, move over one, down 2
+        GameManager.updatePlayer(PlayerDirection.DIRECTION_RIGHT);
+        GameManager.updatePlayer(PlayerDirection.DIRECTION_RIGHT);
+        GameManager.updatePlayer(PlayerDirection.DIRECTION_DOWN);
         GameManager.updatePlayer(PlayerDirection.DIRECTION_DOWN);
 
         // Assert
-        assertFalse(GameManager.canMove(new Position(1,0)));
+        assertFalse(GameManager.canMove(new Position(2,1)));
     }
 }
