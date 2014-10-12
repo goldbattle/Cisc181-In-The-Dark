@@ -60,7 +60,7 @@ public class GameManager {
 
 	// TODO: Load stats
 
-	// Static content
+	// Static content (make this dynamic in the maze if needed)
 	start = new Start(new Position(0, 0));
 	finish = new Finish(new Position(ROWS-1, COLUMNS-1));
 	

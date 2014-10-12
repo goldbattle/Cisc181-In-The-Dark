@@ -15,41 +15,41 @@ public class Player implements IGameTile {
      * @param position Top left position of the player
      */
     public Player(Position position) {
-	this.position = position;
-	this.image = new Image("O");
+        this.position = position;
+        this.image = new Image("O");
     }
 
     /* Generic Move methods */
 
     public void moveRight() {
-        int new_row = position.getRow();
+        // Change our column
         int new_col = position.getColumn() + 1;
         // Move if you can
-        if(GameManager.canMove(new Position(new_row, new_col)))
+        if(GameManager.canMove(new Position(position.getRow(), new_col)))
             this.position.addColumn(1);
     }
 
     public void moveLeft() {
-        int new_row = position.getRow();
+        // Change our column
         int new_col = position.getColumn() - 1;
         // Move if you can
-        if(GameManager.canMove(new Position(new_row, new_col)))
+        if(GameManager.canMove(new Position(position.getRow(), new_col)))
             this.position.addColumn(-1);
     }
 
     public void moveDown() {
+        // Change our row
         int new_row = position.getRow() + 1;
-        int new_col = position.getColumn();
         // Move if you can
-        if(GameManager.canMove(new Position(new_row, new_col)))
+        if(GameManager.canMove(new Position(new_row, position.getColumn())))
             this.position.addRow(1);
     }
 
     public void moveUp() {
+        // Change our row
         int new_row = position.getRow() - 1;
-        int new_col = position.getColumn();
         // Move if you can
-        if(GameManager.canMove(new Position(new_row, new_col)))
+        if(GameManager.canMove(new Position(new_row, position.getColumn())))
             this.position.addRow(-1);
     }
 
@@ -57,17 +57,17 @@ public class Player implements IGameTile {
 
     @Override
     public boolean canWalkOn() {
-	return false;
+        return false;
     }
 
     @Override
     public Position getPosition() {
-	return position;
+        return position;
     }
 
     @Override
     public Image getImage() {
-	return image;
+        return image;
     }
 
 }
