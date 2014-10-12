@@ -94,6 +94,7 @@ public class GameManager {
         // Compare to min max columns
         if(position.getColumn() < 0 || position.getColumn() >= COLUMNS)
             return false;
+        // Compare to min max rows
         if(position.getRow() < 0 || position.getRow() >= ROWS)
             return false;
         // All passed, can be walked on
