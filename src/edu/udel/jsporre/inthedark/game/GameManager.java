@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import edu.udel.jsporre.inthedark.model.Finish;
 import edu.udel.jsporre.inthedark.model.IGameTile;
 import edu.udel.jsporre.inthedark.model.Player;
+import edu.udel.jsporre.inthedark.model.PlayerDirection;
 import edu.udel.jsporre.inthedark.model.Start;
 import edu.udel.jsporre.inthedark.util.Position;
 
@@ -46,11 +47,11 @@ public class GameManager {
      * This method checks to see if position in interest can be moved to. If so
      * true, else false
      * 
-     * @param position
-     *            The position to be checked
+     * @param position The position to be checked
      * @return Boolean if possible or not
      */
     public static boolean canMove(Position position) {
+	
 	return false;
     }
 
@@ -58,8 +59,22 @@ public class GameManager {
      * Handles updating the player based on action This should be called from a
      * control/tilt listener
      */
-    public static void updatePlayer() {
-	player.moveDown();
+    public static void updatePlayer(PlayerDirection direction) {
+	// Move the player based on the given direction
+	switch(direction){
+	case DIRECTION_UP:
+	    player.moveUp();
+	    break;
+	case DIRECTION_DOWN:
+	    player.moveDown();
+	    break;
+	case DIRECTION_RIGHT:
+	    player.moveRight();
+	    break;
+	case DIRECTION_LEFT:
+	    player.moveLeft();
+	    break;
+	}
     }
 
     /**
