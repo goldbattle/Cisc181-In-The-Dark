@@ -1,5 +1,6 @@
 package edu.udel.jsporre.inthedark.model;
 
+import edu.udel.jsporre.inthedark.game.GameManager;
 import edu.udel.jsporre.inthedark.util.Image;
 import edu.udel.jsporre.inthedark.util.Position;
 
@@ -21,19 +22,35 @@ public class Player implements IGameTile {
     /* Generic Move methods */
 
     public void moveRight() {
-	this.position.addColumn(1);
+        int new_row = position.getRow();
+        int new_col = position.getColumn() + 1;
+        // Move if you can
+        if(GameManager.canMove(new Position(new_row, new_col)))
+            this.position.addColumn(1);
     }
 
     public void moveLeft() {
-	this.position.addColumn(-1);
+        int new_row = position.getRow();
+        int new_col = position.getColumn() - 1;
+        // Move if you can
+        if(GameManager.canMove(new Position(new_row, new_col)))
+            this.position.addColumn(-1);
     }
 
     public void moveDown() {
-	this.position.addRow(1);
+        int new_row = position.getRow() + 1;
+        int new_col = position.getColumn();
+        // Move if you can
+        if(GameManager.canMove(new Position(new_row, new_col)))
+            this.position.addRow(1);
     }
 
     public void moveUp() {
-	this.position.addRow(-1);
+        int new_row = position.getRow() - 1;
+        int new_col = position.getColumn();
+        // Move if you can
+        if(GameManager.canMove(new Position(new_row, new_col)))
+            this.position.addRow(-1);
     }
 
     /* Abstract methods */

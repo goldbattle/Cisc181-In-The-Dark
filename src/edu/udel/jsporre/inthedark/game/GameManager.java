@@ -15,7 +15,7 @@ public class GameManager {
     // Constants
     public static final String GAME_VERSION = "v0.1";
     public static final int MAX_WORLD_HEIGHT = 100;
-    public static final int MAX_WORLD_WIDTH = 100;    
+    public static final int MAX_WORLD_WIDTH = 100;
     
     // Data
     private static ArrayList<IGameTile> tiles;
