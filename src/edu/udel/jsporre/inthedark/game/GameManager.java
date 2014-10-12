@@ -101,8 +101,8 @@ public class GameManager {
     }
 
     /**
-     * Handles updating the player based on action This should be called from a
-     * control/tilt listener
+     * Handles updating the player based on action
+     * This should be called from a control/tilt listener
      */
     public static void updatePlayer(PlayerDirection direction) {
         // Move the player based on the given direction
@@ -123,8 +123,8 @@ public class GameManager {
     }
 
     /**
-     * Prints a debug layout of the grid in the console This allows for handy
-     * debuging of the current game's state
+     * Prints a debug layout of the grid in the console
+     * This allows for handy debuging of the current game's state
      */
     public static void printDebug() {
 
