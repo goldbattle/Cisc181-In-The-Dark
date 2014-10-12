@@ -1,6 +1,8 @@
 package edu.udel.jsporre.inthedark;
 
 import junit.framework.TestCase;
+import edu.udel.jsporre.inthedark.game.GameManager;
+import edu.udel.jsporre.inthedark.model.PlayerDirection;
 import edu.udel.jsporre.inthedark.util.Position;
 
 public class MainTest extends TestCase {
@@ -15,5 +17,19 @@ public class MainTest extends TestCase {
 	assertTrue(temp1.equals(temp2));
 	assertFalse(temp1.equals(temp3));
 	assertFalse(temp1.equals(temp4));
+    }
+    
+    public void test_canMove() {
+	GameManager manager = new GameManager();
+	
+	// Asserts
+	assertFalse(GameManager.canMove(new Position(0,0)));
+	assertTrue(GameManager.canMove(new Position(0,1)));
+	
+	// Update, move player down
+	GameManager.updatePlayer(PlayerDirection.DIRECTION_DOWN);
+	
+	// Assert
+	assertFalse(GameManager.canMove(new Position(1,0)));
     }
 }

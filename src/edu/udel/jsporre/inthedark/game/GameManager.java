@@ -51,18 +51,21 @@ public class GameManager {
      * @return Boolean if possible or not
      */
     public static boolean canMove(Position position) {
+	// Compare tiles
+	for(IGameTile tile : tiles){
+	    // Return false if you can't walk on it
+	    if(tile.getPosition().equals(position) && !tile.canWalkOn())
+		return false;
+	}
+	// Compare Player
+	if(player.getPosition().equals(position) && !player.canWalkOn())
+	    return false;
 	// Compare start
 	if(start.getPosition().equals(position) && !start.canWalkOn())
 	    return false;
 	// Compare finish
 	if(finish.getPosition().equals(position) && !finish.canWalkOn())
 	    return false;
-	// Compare other tiles
-	for(IGameTile tile : tiles){
-	    // Return false if you can't walk on it
-	    if(tile.getPosition().equals(position) && !tile.canWalkOn())
-		return false;
-	}
 	// All passed, can be walked on
 	return true;
     }
