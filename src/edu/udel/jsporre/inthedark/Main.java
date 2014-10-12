@@ -22,12 +22,15 @@ public class Main {
 	System.out.println("Loaded in: " + (System.currentTimeMillis()-time_start) + "ms\n");
 	
 	// This is just for testing in the console
-	// Handle key presses for testing
 	Scanner scanner = new Scanner(System.in);
+	String line_in = "";
+	
+	// Nice message
 	System.out.println("Enter a direction [up,down,right,left].");
 	System.out.println("Type \"exit\" to exit.");
 	GameManager.printDebug();
-	String line_in = "";
+	
+	// Loop till we get the exit command
 	while(!line_in.equals("exit")) {
 	    // Read in input
 	    line_in = scanner.nextLine();

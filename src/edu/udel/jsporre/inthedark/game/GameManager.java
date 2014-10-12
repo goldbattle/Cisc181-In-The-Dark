@@ -7,6 +7,7 @@ import edu.udel.jsporre.inthedark.model.IGameTile;
 import edu.udel.jsporre.inthedark.model.Player;
 import edu.udel.jsporre.inthedark.model.PlayerDirection;
 import edu.udel.jsporre.inthedark.model.Start;
+import edu.udel.jsporre.inthedark.model.Wall;
 import edu.udel.jsporre.inthedark.util.Position;
 
 public class GameManager {
@@ -32,6 +33,23 @@ public class GameManager {
 	// TODO: Add events
 
 	// TODO: Load maze generator
+	tiles.add(new Wall(new Position(1,0)));
+	tiles.add(new Wall(new Position(1,2)));
+	tiles.add(new Wall(new Position(0,2)));
+	tiles.add(new Wall(new Position(2,0)));
+	tiles.add(new Wall(new Position(2,2)));
+	tiles.add(new Wall(new Position(3,0)));
+	
+	tiles.add(new Wall(new Position(4,0)));
+	tiles.add(new Wall(new Position(4,1)));
+	tiles.add(new Wall(new Position(4,2)));
+	tiles.add(new Wall(new Position(4,3)));
+	
+	tiles.add(new Wall(new Position(4,4)));
+	tiles.add(new Wall(new Position(3,4)));
+	tiles.add(new Wall(new Position(2,4)));
+	tiles.add(new Wall(new Position(1,4)));
+	tiles.add(new Wall(new Position(0,4)));
 
 	// TODO: Load stats
 
@@ -98,19 +116,19 @@ public class GameManager {
      */
     public static void printDebug() {
 	
-	System.out.println("=========================");
+	System.out.println("==========");
 	
 	IGameTile[][] temp = new IGameTile[10][10];
-
-	// Print out our statics
-	temp[start.getPosition().getRow()][start.getPosition().getColumn()] = start;
-	temp[finish.getPosition().getRow()][finish.getPosition().getColumn()] = finish;
-	temp[player.getPosition().getRow()][player.getPosition().getColumn()] = player;
 
 	// Add tiles
 	for (IGameTile tile : tiles) {
 	    temp[tile.getPosition().getRow()][tile.getPosition().getColumn()] = tile;
 	}
+	
+	// Add out our statics
+	temp[start.getPosition().getRow()][start.getPosition().getColumn()] = start;
+	temp[finish.getPosition().getRow()][finish.getPosition().getColumn()] = finish;
+	temp[player.getPosition().getRow()][player.getPosition().getColumn()] = player;
 
 	// Print out the icon for each
 	for (int i = 0; i < temp.length; i++) {
@@ -119,12 +137,12 @@ public class GameManager {
 		if (temp[i][j] != null)
 		    System.out.print(temp[i][j].getImage());
 		else
-		    System.out.print("  ");
+		    System.out.print(" ");
 	    }
 	    System.out.print("\n");
 	}
 	
-	System.out.println("=========================");
+	System.out.println("==========");
     }
 
 }

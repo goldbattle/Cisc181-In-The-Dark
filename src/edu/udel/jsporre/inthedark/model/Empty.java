@@ -15,7 +15,7 @@ public class Empty implements IGameTile {
      */
     public Empty(Position position) {
 	this.position = position;
-	this.image = new Image("  ");
+	this.image = new Image(" ");
     }
 
     /* Abstract methods */
