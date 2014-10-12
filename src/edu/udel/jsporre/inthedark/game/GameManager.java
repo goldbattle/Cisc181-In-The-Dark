@@ -44,8 +44,8 @@ public class GameManager {
     }
 
     /**
-     * This method checks to see if position in interest can be moved to. If so
-     * true, else false
+     * This method checks to see if position in interest can be moved to. 
+     * If so true, else false
      * 
      * @param position The position to be checked
      * @return Boolean if possible or not

@@ -79,4 +79,17 @@ public class Position extends Component3d {
 	int dy = Math.abs(other.getRow() - getRow());
 	return dx + dy;
     }
+    
+    /**
+     * Returns true if the two positions match
+     * Returns false if they do not have the same row and column
+     * 
+     * @param other Position to be compared
+     * @return Boolean if matching or not
+     */
+    public boolean equals(Position other) {
+	if(this.getColumn() == other.getColumn() && this.getRow() == other.getRow())
+	    return true;
+	return false;
+    }
 }
