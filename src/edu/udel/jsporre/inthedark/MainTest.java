@@ -58,4 +58,44 @@ public class MainTest extends TestCase {
         // Assert
         assertFalse(GameManager.canMove(new Position(2,1)));
     }
+    
+    
+    public static void main(String[] args) {
+
+        // Create our manager
+        new GameManager();
+        
+        // Init state
+        System.out.println("Start Game:");
+        GameManager.printDebug();
+        System.out.println();
+        
+        // Move player some, for mid game state
+        GameManager.updatePlayer(PlayerDirection.DIRECTION_RIGHT);
+        GameManager.updatePlayer(PlayerDirection.DIRECTION_DOWN);
+        GameManager.updatePlayer(PlayerDirection.DIRECTION_DOWN);
+        System.out.println("Mid Game:");
+        GameManager.printDebug();
+        System.out.println();
+        
+        // End game
+        GameManager.updatePlayer(PlayerDirection.DIRECTION_DOWN);
+        GameManager.updatePlayer(PlayerDirection.DIRECTION_RIGHT);
+        GameManager.updatePlayer(PlayerDirection.DIRECTION_RIGHT);
+        GameManager.updatePlayer(PlayerDirection.DIRECTION_UP);
+        GameManager.updatePlayer(PlayerDirection.DIRECTION_UP);
+        GameManager.updatePlayer(PlayerDirection.DIRECTION_RIGHT);
+        GameManager.updatePlayer(PlayerDirection.DIRECTION_RIGHT);
+        GameManager.updatePlayer(PlayerDirection.DIRECTION_DOWN);
+        GameManager.updatePlayer(PlayerDirection.DIRECTION_DOWN);
+        GameManager.updatePlayer(PlayerDirection.DIRECTION_DOWN);
+        GameManager.updatePlayer(PlayerDirection.DIRECTION_RIGHT);
+        GameManager.updatePlayer(PlayerDirection.DIRECTION_RIGHT);
+        GameManager.updatePlayer(PlayerDirection.DIRECTION_RIGHT);
+        GameManager.updatePlayer(PlayerDirection.DIRECTION_RIGHT);
+        System.out.println("End Game:");
+        GameManager.printDebug();
+        System.out.println();
+        
+    }
 }
