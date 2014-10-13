@@ -1,5 +1,8 @@
 package edu.udel.jsporre.inthedark.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.udel.jsporre.inthedark.model.*;
 import edu.udel.jsporre.inthedark.game.*;
 
@@ -34,15 +37,24 @@ public class MazeGenerator {
             System.out.print("\n");
         }    
     }
-    
-    public boolean getPossible(Position here){
-        
-        
-        
-        
-        return false;
+    // Creates a list of possible places to move that follow our algorithm to create the maze
+    public List<Position> getPossible(Position here){
+        Position above = new Position(here.getX() + 1, here.getY());
+        Position below = new Position(here.getX() - 1, here.getY());
+        Position right = new Position(here.getX(), here.getY() + 1);
+        Position left = new Position(here.getX(), here.getY() - 1);
+        List possible = new ArrayList<Position>();
+        if (isMovable(above) == true)
+            possible.add(above);
+        if (isMovable(below) == true)
+            possible.add(below);
+        if (isMovable(right) == true)
+            possible.add(right);
+        if (isMovable(left) == true)
+            possible.add(left);
+        return possible;
     }
-    
+    //Checks to see if a possible destination is ok to move to
     public boolean isMovable(Position place){
         if(place.getColumn() < 0 || place.getColumn() >= column)
             return false;
@@ -57,9 +69,14 @@ public class MazeGenerator {
         }
         return true;
     }
-    
+    //Counts the number of ones that are around a possible destination
     public int numberOfOnes(Position place){
-        return 1;
+        Position above = new Position(place.getX() + 1, place.getY());
+        Position below = new Position(place.getX() - 1, place.getY());
+        Position right = new Position(place.getX(), place.getY() + 1);
+        Position left = new Position(place.getX(), place.getY() - 1);
+        int count = maze[above.getRow()][above.getColumn()] + maze[below.getRow()][below.getColumn()] + maze[right.getRow()][right.getColumn()] + maze[left.getRow()][left.getColumn()]; 
+        return count;
     }
     
     
