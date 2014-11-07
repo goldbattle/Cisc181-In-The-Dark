@@ -10,8 +10,8 @@ public class MainMaze {
         
         Position start = new Position(0,0);
         Position finish = new Position(9,9);
-        int[][] maze = MazeGenerator.makeMaze(start, finish, 10, 10);
-        MazeGenerator.printDebug(maze);
+        //int[][] maze = MazeGenerator.makeMaze(start, finish, 10, 10);
+        //MazeGenerator.printDebug(maze);
     }
 
 }
