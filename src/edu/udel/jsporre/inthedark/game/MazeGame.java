@@ -3,6 +3,7 @@ package edu.udel.jsporre.inthedark.game;
 import java.util.ArrayList;
 
 import edu.udel.jatlas.gameframework.Game;
+import edu.udel.jatlas.gameframework.Tickable;
 import edu.udel.jsporre.inthedark.model.Finish;
 import edu.udel.jsporre.inthedark.model.IGameTile;
 import edu.udel.jsporre.inthedark.model.Player;
@@ -10,7 +11,7 @@ import edu.udel.jsporre.inthedark.model.Start;
 import edu.udel.jsporre.inthedark.model.Wall;
 import edu.udel.jsporre.inthedark.util.Position;
 
-public class MazeGame extends Game {
+public class MazeGame extends Game implements Tickable {
 
 
     // Constants
@@ -76,8 +77,21 @@ public class MazeGame extends Game {
         // Put the player ontop of the start
         player = new Player(new Position(start.getPosition().getRow(), start.getPosition().getColumn()));
     }
-
-
+    
+    /**
+     * On tick, this handles updating the different tick methods
+     */
+    public void onTick() {
+        
+    }
+    
+    /**
+     * Gets the real tick length/fps
+     */
+    public long getRealTimeTickLength() {
+        return 100;
+    }
+    
     /**
      * This method checks to see if position in interest can be moved to. 
      * If so true, else false
@@ -129,7 +143,7 @@ public class MazeGame extends Game {
     public String toString() {
         
         // Data needed
-        String result = "==========";
+        String result = "==========\n";
         IGameTile[][] temp = new IGameTile[ROWS][COLUMNS];
 
         // Add tiles
@@ -157,7 +171,12 @@ public class MazeGame extends Game {
         // Return
         return result;
     }
-
+    
+    /**
+     * Get the player object
+     * 
+     * @return Player of the game
+     */
     public Player getPlayer() {
         return player;
     }
