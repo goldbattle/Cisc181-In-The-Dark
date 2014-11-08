@@ -89,7 +89,7 @@ public class MazeGame extends Game implements Tickable {
      * Gets the real tick length/fps
      */
     public long getRealTimeTickLength() {
-        return 100;
+        return 200;
     }
     
     /**
@@ -123,6 +123,41 @@ public class MazeGame extends Game implements Tickable {
             return false;
         // All passed, can be walked on
         return true;
+    }
+    
+    public int amountOfExits(Position pos) {
+        // Master count var
+        int count = 4;
+        // Possible move positions
+        Position up = new Position(pos.getRow()-1, pos.getColumn());
+        Position down = new Position(pos.getRow()+1, pos.getColumn());
+        Position left = new Position(pos.getRow(), pos.getColumn()-1);
+        Position right = new Position(pos.getRow(), pos.getColumn()+1);
+        // Subtract one from count if it is a wall
+        for(IGameTile tile : tiles) {
+            if(tile.getPosition().equals(up))
+                count--;
+            if(tile.getPosition().equals(down))
+                count--;
+            if(tile.getPosition().equals(left))
+                count--;
+            if(tile.getPosition().equals(right))
+                count--;
+        }
+        // Compare to min max distances
+        if(up.getColumn() < 0 || up.getColumn() >= COLUMNS || up.getRow() < 0 || up.getRow() >= ROWS)
+            count--;
+        // Compare to min max distances
+        if(down.getColumn() < 0 || down.getColumn() >= COLUMNS || down.getRow() < 0 || down.getRow() >= ROWS)
+            count--;
+        // Compare to min max distances
+        if(left.getColumn() < 0 || left.getColumn() >= COLUMNS || left.getRow() < 0 || left.getRow() >= ROWS)
+            count--;
+        // Compare to min max distances
+        if(right.getColumn() < 0 || right.getColumn() >= COLUMNS || right.getRow() < 0 || right.getRow() >= ROWS)
+            count--;
+        // Return
+        return count;
     }
 
     /**
@@ -174,11 +209,26 @@ public class MazeGame extends Game implements Tickable {
     
     /**
      * Get the player object
-     * 
      * @return Player of the game
      */
     public Player getPlayer() {
         return player;
+    }
+    
+    /**
+     * Get the Start object
+     * @return Start of the game
+     */
+    public Start getStart() {
+        return start;
+    }
+    
+    /**
+     * Get the Finish object
+     * @return Finish of the game
+     */
+    public Finish getFinish() {
+        return finish;
     }
 
 }
