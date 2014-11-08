@@ -4,7 +4,7 @@ import edu.udel.jatlas.gameframework.Action;
 import edu.udel.jsporre.inthedark.model.PlayerDirection;
 import edu.udel.jsporre.inthedark.util.Position;
 
-public class PlayMoveAction implements Action<MazeGame>{
+public class ActionPlayMove implements Action<MazeGame>{
     
     private PlayerDirection direction;
     
@@ -12,7 +12,7 @@ public class PlayMoveAction implements Action<MazeGame>{
      * A Player move is defined by a new position that a player
      * wants to move to.
      */
-    public PlayMoveAction(PlayerDirection direction) {
+    public ActionPlayMove(PlayerDirection direction) {
         this.direction = direction;
     }
     

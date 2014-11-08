@@ -3,7 +3,7 @@ package edu.udel.jsporre.inthedark.game;
 import edu.udel.jatlas.gameframework.Action;
 
 
-public class CreateMazeAction implements Action<MazeGame>{
+public class ActionCreateMaze implements Action<MazeGame>{
     
     private int rows;
     private int columns;
@@ -11,7 +11,7 @@ public class CreateMazeAction implements Action<MazeGame>{
     /**
      * A maze is defined by the amount of rows/columns it has
      */
-    public CreateMazeAction(int rows, int columns) {
+    public ActionCreateMaze(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
     }
