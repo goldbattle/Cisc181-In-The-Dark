@@ -6,7 +6,6 @@ import edu.udel.jatlas.gameframework.Game;
 import edu.udel.jsporre.inthedark.model.Finish;
 import edu.udel.jsporre.inthedark.model.IGameTile;
 import edu.udel.jsporre.inthedark.model.Player;
-import edu.udel.jsporre.inthedark.model.PlayerDirection;
 import edu.udel.jsporre.inthedark.model.Start;
 import edu.udel.jsporre.inthedark.model.Wall;
 import edu.udel.jsporre.inthedark.util.Position;
@@ -36,7 +35,7 @@ public class MazeGame extends Game {
 
         // TODO: Add events
         
-        // TODO: Load Maz generator
+        // TODO: Load Maze generator
         
     }
 
@@ -86,7 +85,7 @@ public class MazeGame extends Game {
      * @param position The position to be checked
      * @return Boolean if possible or not
      */
-    public static boolean canMove(Position position) {
+    public boolean canMove(Position position) {
         // Compare tiles
         for(IGameTile tile : tiles){
             // Return false if you can't walk on it
@@ -157,6 +156,10 @@ public class MazeGame extends Game {
         result += "==========";
         // Return
         return result;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
 }
