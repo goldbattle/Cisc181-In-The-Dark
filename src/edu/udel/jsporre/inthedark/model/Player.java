@@ -22,34 +22,18 @@ public class Player implements IGameTile {
     /* Generic Move methods */
 
     public void moveRight() {
-        // Change our column
-        //int new_col = position.getColumn() + 1;
-        // Move if you can
-        //if(GameManager.canMove(new Position(position.getRow(), new_col)))
         this.position.addColumn(1);
     }
 
     public void moveLeft() {
-        // Change our column
-        //int new_col = position.getColumn() - 1;
-        // Move if you can
-        //if(GameManager.canMove(new Position(position.getRow(), new_col)))
         this.position.addColumn(-1);
     }
 
     public void moveDown() {
-        // Change our row
-        //int new_row = position.getRow() + 1;
-        // Move if you can
-        //if(GameManager.canMove(new Position(new_row, position.getColumn())))
         this.position.addRow(1);
     }
 
     public void moveUp() {
-        // Change our row
-        //int new_row = position.getRow() - 1;
-        // Move if you can
-        //if(GameManager.canMove(new Position(new_row, position.getColumn())))
         this.position.addRow(-1);
     }
     
