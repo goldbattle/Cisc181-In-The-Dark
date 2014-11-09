@@ -49,19 +49,46 @@ public class MazeAI extends AI<MazeGame> {
         // Return
         return validMoves;
     }
-
-    @Override
+    
+    /**
+     * Handles updating the AI after a successful event
+     */
+    public void onPerformActionEvent(Action<MazeGame> action, MazeGame game) {       
+        // Get current player, and action
+        Player player = game.getPlayer();
+        ActionPlayMove m = (ActionPlayMove)action;
+        // Get the last position
+        switch(m.getDirection()){
+            case DIRECTION_UP:
+                visited_locations.add(player.getNextPosition(PlayerDirection.DIRECTION_DOWN));
+                break;
+            case DIRECTION_DOWN:
+                visited_locations.add(player.getNextPosition(PlayerDirection.DIRECTION_UP));
+                break;
+            case DIRECTION_RIGHT:
+                visited_locations.add(player.getNextPosition(PlayerDirection.DIRECTION_LEFT));
+                break;
+            case DIRECTION_LEFT:
+                visited_locations.add(player.getNextPosition(PlayerDirection.DIRECTION_RIGHT));
+                break;
+        }
+    }
+    
+    /**
+     * Calculates a heuristic score based on distance and other details
+     * 
+     * If the game is over return -1
+     * If you can not move in that direction 0
+     * If the next is the finish, always move towards it
+     * If you have not visited the location, go there
+     */
     public double getHeuristicScore(Action<MazeGame> action, MazeGame game) {
         if (game.isEnd()) {
             return -1;
         }
         // Convert the action to our ActionPlayMove
         ActionPlayMove m = (ActionPlayMove)action;
-        // Add the current position
-        if(!visited_locations.contains(game.getPlayer().getPosition())) {
-            visited_locations.add(game.getPlayer().getPosition());
-        }
-        System.out.print(visited_locations);
+       
         // Get the player
         Player player = game.getPlayer();
         Position next = player.getNextPosition(m.getDirection());
@@ -72,17 +99,15 @@ public class MazeAI extends AI<MazeGame> {
         if(next.equals(game.getFinish().getPosition())) {
             return Double.MAX_VALUE;
         }
-        // Don't go back to the start
-        if(next.equals(game.getFinish().getPosition())){
-            return 0;
-        }
-       
+        
+        // If not visited, then weight it more
         if(!visited_locations.contains(next)) {
-            System.out.println(m +""+(next.blockDistance(game.getFinish().getPosition()) + game.amountOfExits(next)-5));
-            return (game.ROWS + game.COLUMNS) - next.blockDistance(game.getFinish().getPosition()) + game.amountOfExits(next) - 5;
+            //System.out.println(m +"A: "+(next.blockDistance(game.getFinish().getPosition()) + game.amountOfExits(next)+5));
+            return (game.ROWS + game.COLUMNS) - next.blockDistance(game.getFinish().getPosition()) - game.amountOfExits(next) + 5;
         } else {
-            System.out.println(m +""+(next.blockDistance(game.getFinish().getPosition()) + game.amountOfExits(next)));
-            return (game.ROWS + game.COLUMNS) - next.blockDistance(game.getFinish().getPosition()) + game.amountOfExits(next);
+            //System.out.println(m +"B: "+(next.blockDistance(game.getFinish().getPosition()) + game.amountOfExits(next)));
+            return (game.ROWS + game.COLUMNS) - next.blockDistance(game.getFinish().getPosition()) - game.amountOfExits(next);
         }
     }
 }
+
