@@ -24,7 +24,7 @@ public class MazeGenerator {
     public int[][] getMaze(){
         return maze;
     }
-    
+
     public void resetMaze() {
         this.maze = new int[row][column];
     }
@@ -52,57 +52,46 @@ public class MazeGenerator {
         // Recurse from the start
         this.recurseMaze(start);
     }
-    
+
     /**
      * Comment here..
      * Private recursive function that loops through every space from a start position
      * 
      * @param place
      */
-    private void recurseMaze(Position place){
-        // Make sure that we are not invalid
-        if(numberOfOnes(place) > 1){
-            return;
-        }
+    public void recurseMaze(Position place){
         // Make sure we are not ontop of the finish
         if(maze[place.getRow()][place.getColumn()] == 2) {
             return;
         }
-        // If so, update and check if we are near the end
+
+        // Make the tile into a 1, our representation of a path
         maze[place.getRow()][place.getColumn()] = 1;
+
+        // Checks to see if it is next to the finish
         if(nextToTwo(place)){
             return;
         }
-        // Get all possible moves
+        // Get the possible positions to move to
         List<Position> possible = getPossible(place);
-        // Return if we have no moves
-        if(possible.size() < 1) {
+
+        // If no possible moves, then end method
+        if (possible.size() == 0){
             return;
         }
-        // Loop through each place and see if it is next to the exit
-        int index = -1;
-        for(int i=0; i<possible.size(); i++){
-            if(nextToTwo(possible.get(i))){
-                index = i;
-            }
-        }
-        if(index != -1){
-            recurseMaze(possible.remove(index));
-        }
-        // Randomize our list
-        Collections.shuffle(possible, new Random(System.nanoTime()));
-        // Loop through each position and try to move there
-        Iterator<Position> it = possible.iterator();
-        while(it.hasNext()) {
-            // Debug
-            //System.out.println(place);
-            //this.printDebug();
-            recurseMaze(it.next());
-            it.remove();
+
+        // If there are possible positions, choose one
+        Random r = new Random();
+        int randomInt = r.nextInt(possible.size());
+        Position nextMove = possible.remove(randomInt);
+        recurseMaze(nextMove);
+
+        // Check the rest of the positions, if we have them
+        if (possible.size() > 0){
+            recurseMaze(place);
         }
     }
-    
-    
+
     /**
      * Comment here...
      * Creates a list of possible places to move that follow our algorithm to create the maze
@@ -131,7 +120,7 @@ public class MazeGenerator {
         }
         return possible;
     }
-    
+
     /**
      * Comment here...
      * Checks to see if a possible destination is ok to move to
@@ -182,7 +171,7 @@ public class MazeGenerator {
         }
         if(place.getColumn() + 1 < maze[place.getRow()].length){
             Position right = new Position(place.getRow(), place.getColumn() + 1);
-         // Check
+            // Check
             if(maze[right.getRow()][right.getColumn()] == 1) {
                 count++;
             }
@@ -203,31 +192,24 @@ public class MazeGenerator {
      * @param place
      * @return
      */
-    private boolean nextToTwo(Position place){
+    public boolean nextToTwo(Position place){
         if(place.getRow() - 1 > -1){
             Position above = new Position(place.getRow() - 1, place.getColumn());
-            // Check
-            if(maze[above.getRow()][above.getColumn()] == 2) {
-                return true;
-            }
-        } else if(place.getRow() + 1 < maze.length){
+            return (maze[above.getRow()][above.getColumn()] == 2);
+        }
+
+        else if(place.getRow() + 1 < maze.length){
             Position below = new Position(place.getRow() + 1, place.getColumn());
-            // Check
-            if(maze[below.getRow()][below.getColumn()] == 2) {
-                return true;
-            }
-        } else if(place.getColumn() + 1 < maze[place.getRow()].length){
+            return(maze[below.getRow()][below.getColumn()] == 2);
+
+        }
+        else if(place.getColumn() + 1 < maze[place.getRow()].length){
             Position right = new Position(place.getRow(), place.getColumn() + 1);
-            // Check
-            if(maze[right.getRow()][right.getColumn()] == 2) {
-                return true;
-            }
-        } else if(place.getColumn() - 1 > -1){
+            return(maze[right.getRow()][right.getColumn()] == 2);
+        }
+        else if(place.getColumn() - 1 > -1){
             Position left = new Position(place.getRow(), place.getColumn() - 1);
-            // Check
-            if(maze[left.getRow()][left.getColumn()] == 2) {
-                return true;
-            }
+            return(maze[left.getRow()][left.getColumn()] == 2);
         }
         return false;
 
