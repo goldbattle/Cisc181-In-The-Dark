@@ -1,6 +1,7 @@
 package edu.udel.jsporre.inthedark;
 
 import edu.udel.jatlas.gameframework.ConsoleListener;
+import edu.udel.jsporre.inthedark.game.ActionCreateMaze;
 import edu.udel.jsporre.inthedark.game.MazeAI;
 import edu.udel.jsporre.inthedark.game.MazeGame;
 
@@ -14,7 +15,8 @@ public class Main {
 
         // Create our manager
         MazeGame game = new MazeGame();
-        game.createDefaultGame();
+        //game.createDefaultGame();
+        game.perform(new ActionCreateMaze(10, 10));
         game.addGameListener(new ConsoleListener());
         game.addGameListener(new MazeAI(game));
         game.start();

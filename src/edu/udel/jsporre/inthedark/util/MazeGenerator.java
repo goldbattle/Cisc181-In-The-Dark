@@ -1,8 +1,6 @@
 package edu.udel.jsporre.inthedark.util;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -59,7 +57,7 @@ public class MazeGenerator {
      * 
      * @param place
      */
-    public void recurseMaze(Position place){
+    private void recurseMaze(Position place){
         // Make sure we are not ontop of the finish
         if(maze[place.getRow()][place.getColumn()] == 2) {
             return;

@@ -18,8 +18,8 @@ public class MazeGame extends Game implements Tickable {
     public static final String GAME_VERSION = "v0.3";
     public static final int MAX_WORLD_HEIGHT = 100;
     public static final int MAX_WORLD_WIDTH = 100;
-    public static final int COLUMNS = 10;
-    public static final int ROWS = 5;
+    public static int COLUMNS = 10;
+    public static int ROWS = 10;
 
     // Data
     private static ArrayList<IGameTile> tiles;
@@ -45,6 +45,9 @@ public class MazeGame extends Game implements Tickable {
      * This is just for testing purposes, in the real game it should call the maze generator
      */
     public void createDefaultGame() {
+        // Set or size
+        COLUMNS = 10;
+        ROWS = 5;
         
         // Load tiles
         tiles.add(new Wall(new Position(1,0)));
@@ -167,6 +170,10 @@ public class MazeGame extends Game implements Tickable {
      * @return Boolean state of the game
      */
     public boolean isEnd() {
+        if(player == null)
+            return false;
+        if(finish == null)
+            return false;
         return player.getPosition().equals(finish.getPosition());
     }
 
@@ -187,9 +194,12 @@ public class MazeGame extends Game implements Tickable {
         }
 
         // Add out our statics
-        temp[start.getPosition().getRow()][start.getPosition().getColumn()] = start;
-        temp[finish.getPosition().getRow()][finish.getPosition().getColumn()] = finish;
-        temp[player.getPosition().getRow()][player.getPosition().getColumn()] = player;
+        if(start != null)
+            temp[start.getPosition().getRow()][start.getPosition().getColumn()] = start;
+        if(finish != null)
+            temp[finish.getPosition().getRow()][finish.getPosition().getColumn()] = finish;
+        if(player != null)
+            temp[player.getPosition().getRow()][player.getPosition().getColumn()] = player;
 
         // Print out the icon for each
         for (int i = 0; i < temp.length; i++) {
@@ -205,6 +215,17 @@ public class MazeGame extends Game implements Tickable {
         result += "==========";
         // Return
         return result;
+    }
+    
+    /**
+     * Take a int array from the maze generation class,
+     * and creates a the wall tiles, this also removes the old walls
+     * 
+     * @param maze Int array that has 0 for walls
+     */
+    public void createNewMaze(int[][] maze) {
+        
+        
     }
     
     /**
@@ -230,5 +251,40 @@ public class MazeGame extends Game implements Tickable {
     public Finish getFinish() {
         return finish;
     }
+
+    /**
+     * Resets the walls of the maze
+     * 
+     * @param walls The walls of the maze
+     */
+    public void setMaze(ArrayList<Wall> walls) {
+        tiles.clear();
+        tiles.addAll(walls);
+    }
+    
+    /**
+     * Reset the start position
+     */
+    public void setStart(Position start2) {
+        start = new Start(start2);
+        
+    }
+
+    /**
+     * Reset the finish position
+     */
+    public void setFinish(Position finish2) {
+        finish = new Finish(finish2);
+        
+    }
+    
+    /**
+     * Reset the player position
+     */
+    public void setPlayer(Position player2) {
+        player = new Player(player2);        
+    }
+    
+
 
 }

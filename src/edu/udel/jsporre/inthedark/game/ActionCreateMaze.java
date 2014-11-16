@@ -1,6 +1,12 @@
 package edu.udel.jsporre.inthedark.game;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import edu.udel.jatlas.gameframework.Action;
+import edu.udel.jsporre.inthedark.model.Wall;
+import edu.udel.jsporre.inthedark.util.MazeGenerator;
+import edu.udel.jsporre.inthedark.util.Position;
 
 
 public class ActionCreateMaze implements Action<MazeGame>{
@@ -30,6 +36,29 @@ public class ActionCreateMaze implements Action<MazeGame>{
     public void update(MazeGame game) {
         // Call the maze generator here
         // Update the maze game tiles
+        Random r = new Random();
+        Position start = new Position(0,r.nextInt(rows));
+        Position finish = new Position(columns-1,r.nextInt(rows));
+        MazeGenerator maze = new MazeGenerator(start, finish, rows, columns);
+        // Recurse
+        maze.recurseMaze();
+        // Create walls
+        ArrayList<Wall> temp = new ArrayList<Wall>();
+        // Loop though the 2d array
+        for (int i = 0; i < maze.getMaze().length; i++) {
+            for (int j = 0; j < maze.getMaze()[i].length; j++) {
+                if(maze.getMaze()[i][j] == 0) {
+                    Position pos = new Position(i,j);
+                    temp.add(new Wall(pos));
+                }
+            }
+        }
+        // Set the new content
+        game.setMaze(temp);
+        // Set start, finish and player positions
+        game.setStart(start);
+        game.setFinish(finish);
+        game.setPlayer(start);
     }
     
     /**
