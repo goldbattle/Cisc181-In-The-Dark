@@ -34,8 +34,7 @@ public class ActionCreateMaze implements Action<MazeGame>{
      * `MazeGame` class so this maze becomes the new one.
      */
     public void update(MazeGame game) {
-        // Call the maze generator here
-        // Update the maze game tiles
+        // Call the maze generator
         Random r = new Random();
         Position start = new Position(0,r.nextInt(rows));
         Position finish = new Position(columns-1,r.nextInt(rows));
@@ -47,6 +46,7 @@ public class ActionCreateMaze implements Action<MazeGame>{
         // Loop though the 2d array
         for (int i = 0; i < maze.getMaze().length; i++) {
             for (int j = 0; j < maze.getMaze()[i].length; j++) {
+                // Create a new wall if needed
                 if(maze.getMaze()[i][j] == 0) {
                     Position pos = new Position(i,j);
                     temp.add(new Wall(pos));

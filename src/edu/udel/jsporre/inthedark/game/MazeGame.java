@@ -218,17 +218,6 @@ public class MazeGame extends Game implements Tickable {
     }
     
     /**
-     * Take a int array from the maze generation class,
-     * and creates a the wall tiles, this also removes the old walls
-     * 
-     * @param maze Int array that has 0 for walls
-     */
-    public void createNewMaze(int[][] maze) {
-        
-        
-    }
-    
-    /**
      * Get the player object
      * @return Player of the game
      */
@@ -285,6 +274,4 @@ public class MazeGame extends Game implements Tickable {
         player = new Player(player2);        
     }
     
-
-
 }
