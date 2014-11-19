@@ -45,3 +45,10 @@ local.properties
 # TeXlipse plugin
 .texlipse
 /bin/
+
+
+#Android Stuff
+!libs/*
+!res/*
+!AndroidManifest.xml
+!project.properties
