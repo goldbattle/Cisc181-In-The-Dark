@@ -273,5 +273,13 @@ public class MazeGame extends Game implements Tickable {
     public void setPlayer(Position player2) {
         player = new Player(player2);        
     }
+
+    public String getStatus() {
+        return "Score: 0/0";
+    }
+    
+    public String getTimer() {
+        return "-00:00";
+    }
     
 }
