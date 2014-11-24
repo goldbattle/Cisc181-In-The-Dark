@@ -27,17 +27,14 @@ public class MazeGame extends Game implements Tickable {
     private static Finish finish;
     private static Start start;
     private static int score;
+    private static int max_score;
+    private static double time;
 
     public MazeGame() {
         // Create our data
         tiles = new ArrayList<IGameTile>();
-
-        // TODO: Create gui maybe?
-
-        // TODO: Add events
-        
-        // TODO: Load Maze generator
-        
+        score = 0;
+        max_score = 0;
     }
 
     /**
@@ -85,7 +82,7 @@ public class MazeGame extends Game implements Tickable {
      * On tick, this handles updating the different tick methods
      */
     public void onTick() {
-        
+        time += getRealTimeTickLength()/1000;
     }
     
     /**
@@ -174,12 +171,18 @@ public class MazeGame extends Game implements Tickable {
             return false;
         if(finish == null)
             return false;
-        return player.getPosition().equals(finish.getPosition());
+        if(player.getPosition().equals(finish.getPosition())) {
+            score++;
+            if(score > max_score)
+                max_score = score;
+            return true;
+        }
+        return false;
     }
 
     /**
      * Prints a debug layout of the grid in the console
-     * This allows for handy debuging of the current game's state
+     * This allows for handy debugging of the current game's state
      * This acts as our toString method for the class, and classes below
      */
     public String toString() {
@@ -275,11 +278,11 @@ public class MazeGame extends Game implements Tickable {
     }
 
     public String getStatus() {
-        return "Score: 0/0";
+        return "Score: "+score+"/"+max_score;
     }
     
     public String getTimer() {
-        return "-00:00";
+        return (int)time + "s";
     }
     
 }

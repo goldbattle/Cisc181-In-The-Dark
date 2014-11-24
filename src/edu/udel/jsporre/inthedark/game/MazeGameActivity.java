@@ -1,8 +1,8 @@
 package edu.udel.jsporre.inthedark.game;
 
 import edu.udel.jatlas.gameframework.Action;
-import edu.udel.jatlas.gameframework.ConsoleListener;
 import edu.udel.jatlas.gameframework.GameListener;
+import edu.udel.jatlas.gameframework.android.AndroidTicker;
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -21,7 +21,9 @@ public class MazeGameActivity extends Activity implements GameListener<MazeGame>
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         status = new TextView(this);
+        status.setTypeface(Typeface.MONOSPACE);
         timer = new TextView(this);
+        timer.setTypeface(Typeface.MONOSPACE);
         //gameView= new TicTacToe5x5View2D(this);
         gameView = new MazeGameView(this);
         status.setTypeface(Typeface.MONOSPACE);
@@ -56,9 +58,10 @@ public class MazeGameActivity extends Activity implements GameListener<MazeGame>
         game = new MazeGame();
         //game.createDefaultGame();
         game.perform(new ActionCreateMaze(10, 10));
-        game.addGameListener(new ConsoleListener());
+        //game.addGameListener(new ConsoleListener());
+        game.addGameListener(this);
         game.addGameListener(new MazeAI(game));
-        game.start();
+        game.start(new AndroidTicker());
     }
     
     public void updateViews() {
@@ -83,9 +86,13 @@ public class MazeGameActivity extends Activity implements GameListener<MazeGame>
     }
     
     @Override
-    public void onTickEvent(MazeGame game) {}
+    public void onTickEvent(MazeGame game) {
+        updateViews();
+    }
     
     @Override
-    public void onEvent(String event, MazeGame game) {}
+    public void onEvent(String event, MazeGame game) {
+        updateViews();
+    }
     
 }

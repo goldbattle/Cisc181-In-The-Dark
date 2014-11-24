@@ -20,7 +20,7 @@ public class MazeAI extends AI<MazeGame> {
      * @param game MazeGame class
      */
     public MazeAI(MazeGame game) {
-        super(game, "Maze AI");
+        super("Maze AI");
         visited_locations = new ArrayList<Position>();
     }
 

@@ -31,6 +31,9 @@ public class ActionPlayMove implements Action<MazeGame>{
         // Get current player
         Player player = game.getPlayer();
         // Check future position
+        if(game == null || player == null)
+            return false;
+        // Check them
         switch(direction){
             case DIRECTION_UP:
                 return game.canMove(player.getNextPosition(PlayerDirection.DIRECTION_UP));
