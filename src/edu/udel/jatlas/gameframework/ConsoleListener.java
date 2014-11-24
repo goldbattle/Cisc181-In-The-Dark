@@ -32,5 +32,6 @@ public class ConsoleListener implements GameListener<Game> {
     
     public void onEvent(String event, Game game) {
         System.out.println(event);
+        System.out.println(game);
     }
 }

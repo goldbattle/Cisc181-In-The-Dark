@@ -28,16 +28,26 @@ import java.util.List;
 // the type warnings so you don't see a lot of yellow lines in Eclipse.
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public abstract class Game {
+    // Lifecycle constants
+    public static final int CREATED = 0;
+    public static final int STARTED = 3;
+    public static final int ACTIONED = 6;
+    public static final int ENDED = 10;
+    
     private List<GameListener> listeners;
     
     // a counter that stores the current tick (starts at 0)
     private long tickId;
-    // stores the last time an action was performed
-    private long lastActionTime;
+    // stores the last tick an action was performed
+    private long lastActionTickId;
     // stores the last time an onTick was processed
     private long lastTickTime;
-    // if the game is Tickable this will have a Ticker, otherwise null
-    private Ticker ticker;
+    // the "real" time tick length, default of 1000 is in milliseconds
+    private long realTimeTickLength;
+    // the Ticker for the Game
+    private GameTicker ticker;
+    // keeps track of the lifecycle of a game
+    private int lifecycle;
     
     /**
      * Allows subclasses to not have to call a specific Game constructor.
@@ -46,8 +56,10 @@ public abstract class Game {
     protected Game() {
         listeners = new ArrayList<GameListener>();
         tickId = 0;
-        lastActionTime = 0;
+        lastActionTickId = -1;
         lastTickTime = 0;
+        realTimeTickLength = 1000;
+        lifecycle = CREATED;
     }
     
     /**
@@ -88,10 +100,13 @@ public abstract class Game {
      * @param action
      */
     public final void perform(Action action) {
-        if (action.isValid(this)) {
+        if (lifecycle == STARTED) {
+            lifecycle = ACTIONED;
+        }
+        if (lifecycle == ACTIONED && action.isValid(this)) {
             onPerformAction(action);
             
-            lastActionTime = System.currentTimeMillis();
+            lastActionTickId = tickId;
             for (GameListener listener : listeners) {
                 listener.onPerformActionEvent(action, this);
             }
@@ -109,7 +124,7 @@ public abstract class Game {
      */
     public final boolean tick() {
         onTick();
-        lastActionTime = System.currentTimeMillis();
+        lastTickTime = System.currentTimeMillis();
         for (GameListener listener : listeners) {
             listener.onTickEvent(this);
         }
@@ -123,41 +138,69 @@ public abstract class Game {
     }
     
     /**
+     * Default real time tick length is one second (1000ms).
+     * Call the setter from subclass constructor to set a fixed value
+     * or override this method for dynamic options.
+     */
+    public long getRealTimeTickLength() {
+        return realTimeTickLength;
+    }
+    
+    /**
+     * Changes the real time tick length property
+     * 
+     * @param ms
+     */
+    public void setRealTimeTickLength(long ms) {
+        realTimeTickLength = ms;
+    }
+    
+    /**
      * Marked as final to prevent overriding.  Subclasses must
      * put start logic in their onStart method.  This ensures
      * that listeners are notified of the start and that
      * time-based games start the Ticker.
      */
-    public final void start() {
-        if (this instanceof Tickable) {
-            ticker = Ticker.start((Tickable)this);
-        }
-        
-        onStart();
-        for (GameListener listener : listeners) {
-            listener.onStartEvent(this);
+    public final void start(GameTicker ticker) {
+        if (lifecycle == CREATED) {
+            lifecycle = STARTED;
+            
+            this.ticker = ticker;
+            ticker.start(this);
+            onStart();
+            for (GameListener listener : listeners) {
+                listener.onStartEvent(this);
+            }
         }
     }
 
     /**
-     * Marked as final to prevent overriding.  This is only
-     * called internally from the tick and perform methods when
-     * isEnd produces a true value.  If you want to programmatically
-     * end a game, then you should have a way of setting a boolean
-     * property of your game such that your isEnd will produce a
-     * true value.
+     * We can manually end games.
      */
-    private final void end() {
-        if (ticker != null) {
-            ticker.end();
-        }
-        
-        onEnd();
-        for (GameListener listener : listeners) {
-            listener.onEndEvent(this);
+    public final void end() {
+        if (lifecycle != ENDED) {
+            lifecycle = ENDED;
+            
+            if (ticker != null) {
+                ticker.end();
+            }
+            
+            onEnd();
+            for (GameListener listener : listeners) {
+                listener.onEndEvent(this);
+            }
         }
     }
     
+    /**
+     * Returns the current Lifecycle stage of the game.
+     * See the constants in this class.
+     * 
+     * @return
+     */
+    public int getLifecycle() {
+        return lifecycle;
+    }
 
     /**
      * This is the method to override if you need to do something
@@ -203,8 +246,8 @@ public abstract class Game {
         return tickId;
     }
     
-    public long getLastActionTime() {
-        return lastActionTime;
+    public long getLastActionTickId() {
+        return lastActionTickId;
     }
     
     public long getLastTickTime() {
