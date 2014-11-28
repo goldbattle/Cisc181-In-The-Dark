@@ -53,7 +53,10 @@ public class MazeAI extends AI<MazeGame> {
     /**
      * Handles updating the AI after a successful event
      */
-    public void onPerformActionEvent(Action<MazeGame> action, MazeGame game) {       
+    public void onPerformActionEvent(Action<MazeGame> action, MazeGame game) {
+	// Only handle our actions
+	if(!(action instanceof ActionPlayMove))
+	    return;
         // Get current player, and action
         Player player = game.getPlayer();
         ActionPlayMove m = (ActionPlayMove)action;

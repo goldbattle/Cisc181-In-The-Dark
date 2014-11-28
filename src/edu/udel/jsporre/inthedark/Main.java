@@ -17,10 +17,11 @@ public class Main {
         // Create our manager
         MazeGame game = new MazeGame();
         //game.createDefaultGame();
-        game.perform(new ActionCreateMaze(10, 10));
+        
         game.addGameListener(new ConsoleListener());
         game.addGameListener(new MazeAI(game));
         game.start(new JavaTicker());
+        game.perform(new ActionCreateMaze(10, 10));
         
         // Done
         System.out.println("Loaded in: " + (System.currentTimeMillis()-time_start) + "ms\n");

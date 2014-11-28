@@ -20,20 +20,20 @@ public class MazeGameView extends View {
     
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        
-        Paint gridPaint = new Paint();
-        gridPaint.setColor(Color.WHITE);
-        gridPaint.setStyle(Style.FILL_AND_STROKE); 
-        gridPaint.setTextSize(30);
-        
-        int x = 100, y = 100;
-        for(String line: activity.game.toString().split("\n")){
-              canvas.drawText(line, x, y, gridPaint);
-              y+=30;
-        }
-        
+	super.onDraw(canvas);
+
+	Paint gridPaint = new Paint();
+	gridPaint.setColor(Color.WHITE);
+	gridPaint.setStyle(Style.FILL_AND_STROKE); 
+	gridPaint.setTextSize(30);
+
+	int x = 100, y = 100;
+	for(String line: activity.game.toString().split("\n")){
+	    canvas.drawText(line, x, y, gridPaint);
+	    y+=30;
+	}
+
     }
-    
+
 
 }

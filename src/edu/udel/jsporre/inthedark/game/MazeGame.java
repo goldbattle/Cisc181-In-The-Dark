@@ -175,7 +175,9 @@ public class MazeGame extends Game implements Tickable {
             score++;
             if(score > max_score)
                 max_score = score;
-            return true;
+            // Start new match
+            this.perform(new ActionCreateMaze(ROWS, COLUMNS));
+            //return true;
         }
         return false;
     }

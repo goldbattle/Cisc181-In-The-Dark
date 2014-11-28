@@ -56,12 +56,13 @@ public class MazeGameActivity extends Activity implements GameListener<MazeGame>
 
     private void startGame() {
         game = new MazeGame();
-        //game.createDefaultGame();
-        game.perform(new ActionCreateMaze(10, 10));
-        //game.addGameListener(new ConsoleListener());
+        
         game.addGameListener(this);
         game.addGameListener(new MazeAI(game));
         game.start(new AndroidTicker());
+        //game.createDefaultGame();
+        //game.addGameListener(new ConsoleListener());
+        game.perform(new ActionCreateMaze(game.ROWS, game.COLUMNS));
     }
     
     public void updateViews() {
