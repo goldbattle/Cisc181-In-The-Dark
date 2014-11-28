@@ -33,7 +33,7 @@ public class CountDown {
     }
     
     public boolean isTimeEnd() {
-	if(count_dir && total_sec/1000 < 0)
+	if(count_dir && total_sec/1000 <= 0)
 	    return true;
 	return false;
     }
