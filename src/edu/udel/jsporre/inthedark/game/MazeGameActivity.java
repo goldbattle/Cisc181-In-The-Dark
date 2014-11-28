@@ -44,7 +44,6 @@ public class MazeGameActivity extends Activity implements GameListener<MazeGame>
 	relativeLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 	relativeLayout.addView(timer, relativeLayoutParams);
 
-
 	// Nice layout, status
 	LinearLayout ll0 = new LinearLayout(this);
 	ll0.addView(status);
@@ -60,6 +59,8 @@ public class MazeGameActivity extends Activity implements GameListener<MazeGame>
 	// Start the game, and display
 	startGame();
 	setContentView(ll1);
+	// Nice message
+	Toast.makeText(this, "Welcome! Click on the menu to start a game!", Toast.LENGTH_LONG).show();
     }
 
     private void startGame() {

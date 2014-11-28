@@ -19,8 +19,8 @@ public class MazeGame extends Game implements Tickable {
     public static final String GAME_VERSION = "v0.3";
     public static final int MAX_WORLD_HEIGHT = 100;
     public static final int MAX_WORLD_WIDTH = 100;
-    public static int COLUMNS = 10;
-    public static int ROWS = 10;
+    public static int COLUMNS = 20;
+    public static int ROWS = 20;
 
     // Data
     private static ArrayList<IGameTile> tiles;
@@ -291,6 +291,10 @@ public class MazeGame extends Game implements Tickable {
     
     public String getTimer() {
         return time.get_remaining();
+    }
+    
+    public static ArrayList<IGameTile> getTiles() {
+        return tiles;
     }
     
 }
