@@ -94,5 +94,7 @@ public class MazeGameActivity extends Activity implements GameListener<MazeGame>
     public void onEvent(String event, MazeGame game) {
         updateViews();
     }
-    
+     public MazeGame getCurrentGame(){
+    	 return game;
+     }
 }
