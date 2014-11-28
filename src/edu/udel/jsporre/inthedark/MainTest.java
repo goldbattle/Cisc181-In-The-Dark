@@ -29,7 +29,7 @@ public class MainTest extends TestCase {
      * Moves the player, and checks for that mutation
      */
     public void test_canMove() {
-        MazeGame game = new MazeGame();
+        MazeGame game = new MazeGame(-1);
         game.createDefaultGame();
 
         // Asserts
@@ -46,7 +46,7 @@ public class MainTest extends TestCase {
     }
 
     public void test_playerMove() {
-        MazeGame game = new MazeGame();
+        MazeGame game = new MazeGame(-1);
         game.createDefaultGame();
 
         // Asserts
@@ -71,7 +71,7 @@ public class MainTest extends TestCase {
     public static void main(String[] args) {
 
         // Create our manager
-        MazeGame game = new MazeGame();
+        MazeGame game = new MazeGame(-1);
         game.createDefaultGame();
         
         // Init state

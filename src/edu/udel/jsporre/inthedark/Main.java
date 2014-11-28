@@ -15,7 +15,7 @@ public class Main {
         double time_start = System.currentTimeMillis();
 
         // Create our manager
-        MazeGame game = new MazeGame();
+        MazeGame game = new MazeGame(-1);
         //game.createDefaultGame();
         
         game.addGameListener(new ConsoleListener());

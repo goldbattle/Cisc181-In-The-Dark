@@ -1,14 +1,18 @@
 package edu.udel.jsporre.inthedark.game;
 
 import edu.udel.jatlas.gameframework.Action;
+import edu.udel.jatlas.gameframework.Game;
 import edu.udel.jatlas.gameframework.GameListener;
 import edu.udel.jatlas.gameframework.android.AndroidTicker;
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MazeGameActivity extends Activity implements GameListener<MazeGame> {
 
@@ -16,6 +20,12 @@ public class MazeGameActivity extends Activity implements GameListener<MazeGame>
     TextView timer;
     MazeGameView gameView;
     MazeGame game;
+    
+    public static final int GAMETYPE_AI = 0;
+    public static final int GAMETYPE_HUMAN = 1;
+    public static final int GAMETYPE_SAND = 2;
+    
+    private int gameType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +37,6 @@ public class MazeGameActivity extends Activity implements GameListener<MazeGame>
 	//gameView= new TicTacToe5x5View2D(this);
 	gameView = new MazeGameView(this);
 	status.setTypeface(Typeface.MONOSPACE);
-
-
 
 	// So much crap to make this stay on the right
 	RelativeLayout relativeLayout = new RelativeLayout(this);
@@ -55,10 +63,27 @@ public class MazeGameActivity extends Activity implements GameListener<MazeGame>
     }
 
     private void startGame() {
-	game = new MazeGame();
-
+	// Make sure we are not yet created
+	if (game != null && game.getLifecycle() != Game.ENDED) {
+            game.end();
+        }
+	// Create based on type
+	if(gameType == GAMETYPE_HUMAN) {
+	    game = new MazeGame(1);
+	    MazeGamePlayer human = new MazeGamePlayer(this);
+	    gameView.setOnTouchListener(human);
+	}
+	else if(gameType == GAMETYPE_SAND){
+	    game = new MazeGame(-1);
+	    MazeGamePlayer human = new MazeGamePlayer(this);
+	    gameView.setOnTouchListener(human);
+	}
+	else if(gameType == GAMETYPE_AI) {
+	    game = new MazeGame(-1);
+	    game.addGameListener(new MazeAI(game));
+	}
+	
 	game.addGameListener(this);
-	game.addGameListener(new MazeAI(game));
 	game.start(new AndroidTicker());
 	//game.createDefaultGame();
 	//game.addGameListener(new ConsoleListener());
@@ -66,8 +91,11 @@ public class MazeGameActivity extends Activity implements GameListener<MazeGame>
     }
 
     public void updateViews() {
-	status.setText(game.getStatus());
+	status.setText("Score: "+game.getStatus());
 	timer.setText(game.getTimer());
+	
+	status.invalidate();
+	timer.invalidate();
 	gameView.invalidate();
     }
 
@@ -93,10 +121,41 @@ public class MazeGameActivity extends Activity implements GameListener<MazeGame>
 
     @Override
     public void onEvent(String event, MazeGame game) {
+	if (event.equals("end_of_game")) {
+	    Toast.makeText(this, "You got a score of: "+game.getStatus(), Toast.LENGTH_LONG).show();
+        }
 	updateViews();
     }
     
     public MazeGame getCurrentGame(){
 	return game;
+    }
+    
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add("AI Run");
+        menu.add("Human Countdown");
+        menu.add("Human Sandbox");
+        menu.add("Exit");
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getTitle().equals("AI Run")) {
+            gameType = GAMETYPE_AI;
+            startGame();
+        }
+        else if (item.getTitle().equals("Human Countdown")) {
+            gameType = GAMETYPE_HUMAN;
+            startGame();
+        }
+        else if (item.getTitle().equals("Human Sandbox")) {
+            gameType = GAMETYPE_SAND;
+            startGame();
+        }
+        else if (item.getTitle().equals("Exit")) {
+            finish();
+        }
+        gameView.invalidate();
+        return true;
     }
 }

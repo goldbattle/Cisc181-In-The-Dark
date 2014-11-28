@@ -9,6 +9,7 @@ import edu.udel.jsporre.inthedark.model.IGameTile;
 import edu.udel.jsporre.inthedark.model.Player;
 import edu.udel.jsporre.inthedark.model.Start;
 import edu.udel.jsporre.inthedark.model.Wall;
+import edu.udel.jsporre.inthedark.util.CountDown;
 import edu.udel.jsporre.inthedark.util.Position;
 
 public class MazeGame extends Game implements Tickable {
@@ -28,13 +29,14 @@ public class MazeGame extends Game implements Tickable {
     private static Start start;
     private static int score;
     private static int max_score;
-    private static double time;
+    private CountDown time;
 
-    public MazeGame() {
+    public MazeGame(int countdown) {
         // Create our data
         tiles = new ArrayList<IGameTile>();
         score = 0;
         max_score = 0;
+        time = new CountDown(countdown, 0);
     }
 
     /**
@@ -82,7 +84,7 @@ public class MazeGame extends Game implements Tickable {
      * On tick, this handles updating the different tick methods
      */
     public void onTick() {
-        time += getRealTimeTickLength()/1000;
+        time.onTick(this);
     }
     
     /**
@@ -177,7 +179,11 @@ public class MazeGame extends Game implements Tickable {
                 max_score = score;
             // Start new match
             this.perform(new ActionCreateMaze(ROWS, COLUMNS));
-            //return true;
+        }
+        // Check if out of time
+        if(time.isTimeEnd()) {
+            broadcastEvent("end_of_game");
+            return true;
         }
         return false;
     }
@@ -280,11 +286,11 @@ public class MazeGame extends Game implements Tickable {
     }
 
     public String getStatus() {
-        return "Score: "+score+"/"+max_score;
+        return score+"/"+max_score;
     }
     
     public String getTimer() {
-        return (int)time + "s";
+        return time.get_remaining();
     }
     
 }
