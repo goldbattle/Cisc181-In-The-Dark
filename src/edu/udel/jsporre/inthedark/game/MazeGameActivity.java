@@ -3,6 +3,7 @@ package edu.udel.jsporre.inthedark.game;
 import edu.udel.jatlas.gameframework.Action;
 import edu.udel.jatlas.gameframework.Game;
 import edu.udel.jatlas.gameframework.GameListener;
+import edu.udel.jatlas.gameframework.SoundManager;
 import edu.udel.jatlas.gameframework.android.AndroidTicker;
 import android.app.Activity;
 import android.graphics.Typeface;
@@ -16,10 +17,11 @@ import android.widget.Toast;
 
 public class MazeGameActivity extends Activity implements GameListener<MazeGame> {
 
-    TextView status;
-    TextView timer;
-    MazeGameView gameView;
-    MazeGame game;
+    private TextView status;
+    private TextView timer;
+    private MazeGameView gameView;
+    private MazeGame game;
+    private SoundManager soundManager;
     
     public static final int GAMETYPE_AI = 0;
     public static final int GAMETYPE_HUMAN = 1;
@@ -30,6 +32,13 @@ public class MazeGameActivity extends Activity implements GameListener<MazeGame>
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
+	
+	// Sounds
+	soundManager = new SoundManager(this);
+	soundManager.init();
+	soundManager.playMusic("Danny_Baranowsky-Super_Meat_Boy-Digital_Special_Edition_Soundtrack-63_4-bit_Meat_Boy_Theme", true);
+
+	// Create views
 	status = new TextView(this);
 	status.setTypeface(Typeface.MONOSPACE);
 	timer = new TextView(this);
@@ -126,6 +135,12 @@ public class MazeGameActivity extends Activity implements GameListener<MazeGame>
 	    Toast.makeText(this, "You got a score of: "+game.getStatus(), Toast.LENGTH_LONG).show();
         }
 	updateViews();
+    }
+    
+    protected void onDestroy() {
+        super.onDestroy();
+        // Remove background music
+        soundManager.stopBackgroundMusic();
     }
     
     public MazeGame getCurrentGame(){
