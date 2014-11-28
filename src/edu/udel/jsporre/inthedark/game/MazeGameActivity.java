@@ -70,7 +70,7 @@ public class MazeGameActivity extends Activity implements GameListener<MazeGame>
         }
 	// Create based on type
 	if(gameType == GAMETYPE_HUMAN) {
-	    game = new MazeGame(1);
+	    game = new MazeGame(10);
 	    MazeGamePlayer human = new MazeGamePlayer(this);
 	    gameView.setOnTouchListener(human);
 	}

@@ -15,12 +15,19 @@ public class MazeGameView extends View {
 
     MazeGameActivity activity;
     private Bitmap wallImage;
+    private Bitmap playerImage;
+    private Bitmap finishImage;
     private RectF rectF = new RectF();
 
     public MazeGameView(MazeGameActivity context) {
 	super(context);
 	activity = context;
 	setBackgroundColor(Color.BLACK);
+	// Images
+	wallImage = loadImage("wall");
+	playerImage = loadImage("player");
+	finishImage = loadImage("finish");
+	// Others
 	setFocusable(true);
 	setFocusableInTouchMode(true);
     }
@@ -29,21 +36,20 @@ public class MazeGameView extends View {
     protected void onDraw(Canvas canvas) {
 	super.onDraw(canvas);
 	
+	// Scale cords
 	canvas.save();
 	canvas.scale(getWidth() / (float)MazeGame.ROWS, getHeight() / (float)MazeGame.COLUMNS);
 	
-	Paint gridPaint = new Paint();
-	gridPaint.setColor(Color.WHITE);
-	gridPaint.setStyle(Style.FILL_AND_STROKE); 
-	gridPaint.setTextSize(30);
-
+	// Debug Text
+//	Paint gridPaint = new Paint();
+//	gridPaint.setColor(Color.WHITE);
+//	gridPaint.setStyle(Style.FILL_AND_STROKE); 
+//	gridPaint.setTextSize(30);
 //	int x = 100, y = 100;
 //	for(String line: activity.game.toString().split("\n")){
 //	    canvas.drawText(line, x, y, gridPaint);
 //	    y+=30;
 //	}
-	
-	wallImage = loadImage("wall");
 	
 	for (IGameTile wall : activity.getCurrentGame().getTiles()) {
 	    Position pos = wall.getPosition();
@@ -51,6 +57,17 @@ public class MazeGameView extends View {
 	    canvas.drawBitmap(wallImage, null, rectF, null);
 	}
 	
+	// Players
+	Position pos1 = activity.getCurrentGame().getPlayer().getPosition();
+	setRectFromPosition(pos1);
+	canvas.drawBitmap(playerImage, null, rectF, null);
+	
+	// Finish
+	Position pos2 = activity.getCurrentGame().getFinish().getPosition();
+	setRectFromPosition(pos2);
+	canvas.drawBitmap(finishImage, null, rectF, null);
+	
+	// Restore the cordinate system
 	canvas.restore();
     }
 
