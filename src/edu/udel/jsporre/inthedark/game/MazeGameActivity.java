@@ -6,6 +6,7 @@ import edu.udel.jatlas.gameframework.GameListener;
 import edu.udel.jatlas.gameframework.SoundManager;
 import edu.udel.jatlas.gameframework.android.AndroidTicker;
 import android.app.Activity;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
@@ -36,13 +37,17 @@ public class MazeGameActivity extends Activity implements GameListener<MazeGame>
 	// Sounds
 	soundManager = new SoundManager(this);
 	soundManager.init();
-	soundManager.playMusic("Danny_Baranowsky-Super_Meat_Boy-Digital_Special_Edition_Soundtrack-63_4-bit_Meat_Boy_Theme", true);
+	soundManager.playMusic("song", true);
 
 	// Create views
 	status = new TextView(this);
 	status.setTypeface(Typeface.MONOSPACE);
+	status.setBackgroundColor(Color.BLACK);
+	status.setTextColor(Color.WHITE);
 	timer = new TextView(this);
 	timer.setTypeface(Typeface.MONOSPACE);
+	timer.setBackgroundColor(Color.BLACK);
+	timer.setTextColor(Color.WHITE);
 	//gameView= new TicTacToe5x5View2D(this);
 	gameView = new MazeGameView(this);
 	status.setTypeface(Typeface.MONOSPACE);
@@ -52,6 +57,7 @@ public class MazeGameActivity extends Activity implements GameListener<MazeGame>
 	RelativeLayout.LayoutParams relativeLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 	relativeLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 	relativeLayout.addView(timer, relativeLayoutParams);
+	relativeLayout.setBackgroundColor(Color.BLACK);
 
 	// Nice layout, status
 	LinearLayout ll0 = new LinearLayout(this);

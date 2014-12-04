@@ -104,12 +104,15 @@ public class MazeAI extends AI<MazeGame> {
         }
         
         // If not visited, then weight it more
-        if(!visited_locations.contains(next)) {
-            //System.out.println(m +"A: "+(next.blockDistance(game.getFinish().getPosition()) + game.amountOfExits(next)+5));
-            return (game.ROWS + game.COLUMNS) - next.blockDistance(game.getFinish().getPosition()) - game.amountOfExits(next) + 5;
+        if(!visited_locations.contains(next) && game.amountOfExits(next) > 1) {
+            //System.out.println(m +"A: "+ game.amountOfExits(next)));
+            return ((game.ROWS + game.COLUMNS) - next.blockDistance(game.getFinish().getPosition()))*2 + game.amountOfExits(next) + 10;
+        } else if(visited_locations.indexOf(next) < visited_locations.indexOf(player.getPosition()) && game.amountOfExits(next) > 1) {
+            //System.out.println(m +"B: "+(next.blockDistance(game.getFinish().getPosition()) + game.amountOfExits(next))+5);
+            return ((game.ROWS + game.COLUMNS) - next.blockDistance(game.getFinish().getPosition()))*2 + game.amountOfExits(next) + 5;
         } else {
-            //System.out.println(m +"B: "+(next.blockDistance(game.getFinish().getPosition()) + game.amountOfExits(next)));
-            return (game.ROWS + game.COLUMNS) - next.blockDistance(game.getFinish().getPosition()) - game.amountOfExits(next);
+            //System.out.println(m +"C: "+(next.blockDistance(game.getFinish().getPosition()) + game.amountOfExits(next)));
+            return ((game.ROWS + game.COLUMNS) - next.blockDistance(game.getFinish().getPosition()))*2 + game.amountOfExits(next);
         }
     }
 }

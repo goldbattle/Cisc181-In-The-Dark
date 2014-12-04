@@ -1,10 +1,11 @@
 package edu.udel.jsporre.inthedark.game;
 
 import edu.udel.jsporre.inthedark.model.PlayerDirection;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class MazeGamePlayer implements View.OnTouchListener {
+public class MazeGamePlayer implements View.OnTouchListener, View.OnKeyListener {
     private MazeGameActivity activity;
 
     public MazeGamePlayer(MazeGameActivity activity){
@@ -50,6 +51,23 @@ public class MazeGamePlayer implements View.OnTouchListener {
 	}
 
 	return false;
+    }
+
+    @Override
+    public boolean onKey(View v, int keyCode, KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DPAD_UP) {
+            activity.getCurrentGame().perform(new ActionPlayMove(PlayerDirection.DIRECTION_UP));
+        }
+        else if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DPAD_DOWN) {
+            activity.getCurrentGame().perform(new ActionPlayMove(PlayerDirection.DIRECTION_DOWN));
+        }
+        else if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DPAD_LEFT) {
+            activity.getCurrentGame().perform(new ActionPlayMove(PlayerDirection.DIRECTION_LEFT));
+        }
+        else if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_DPAD_RIGHT) {
+            activity.getCurrentGame().perform(new ActionPlayMove(PlayerDirection.DIRECTION_RIGHT));
+        }        
+        return false;
     }
 
 }
