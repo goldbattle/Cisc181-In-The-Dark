@@ -16,4 +16,4 @@ A video was recorded for the submission of the project, it can probably still be
 All graphics and sound files were taken from opengameart.org, with the copyright of the sound file (The Road of the Moor NES) belonging to Snabisch.The graphics files are public domain.
 
 ####Ingame Screenshot
-[General Game](screenshot0.png)[Menu Usage](screenshot1.png)
+![General Game](screenshot0.png)![Menu Usage](screenshot1.png)
