@@ -1,7 +1,7 @@
 #Cisc181-In-The-Dark
 
 ####Summary:
-This game is a randomly generated maze game. The goal of the game is to solve each maze as quickly as possible. In the normal gameplay mode, a player has 10 minutes to complete as many mazes, and they can. Each maze is randomly generated each time, and it is likely the player will never re-encounter the same maze twice. The score and high score of the game is the number of mazes completed. There is a simple AI mode, human timed mode, and human sandbox mode. Built ontop of the andriod v2.3.3 API.
+This game is a randomly generated maze game. The goal of the game is to solve each maze as quickly as possible. In the normal gameplay mode, a player has 10 minutes to complete as many mazes as they can. Each maze is randomly generated each time, and it is likely the player will never re-encounter the same maze twice. The score and high score of the game is the number of mazes completed. There is a simple AI mode, human timed mode, and human sandbox mode. Built ontop of the andriod v2.3.3 API.
 
 ####How to Play:
 To interact with the play in the game, simply click the left mouse button around the player in the direction you wish to move. The player can only be moved along open tiles. In the future an easy implementation of specific phone’s gyroscopes, or accelerometer could easily be added. These types of control were not added, as the reliability of these depends phone by phone.
